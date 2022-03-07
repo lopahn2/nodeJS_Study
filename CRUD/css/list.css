@@ -1,0 +1,73 @@
+* {
+			font-family: 'Anton', sans-serif;
+}
+
+body {
+	display : flex;
+	flex-direction : row;
+	
+}
+
+#listContainer {
+	display : flex;
+	flex-direction : column;
+	min-width : 500px;
+	width : 45%;
+	min-height: 1000px;
+	height : 80%;
+	
+}
+
+#listItems > li {
+	display : block;
+	min-width : 450px;
+	width : 90%;
+	min-height : 40px;
+	height : 10%;
+	margin : 10px auto;
+	
+}
+
+#writeBtn {
+	width : 300px;
+	height : 100px;
+	display: block;
+	border : 2px solid black;
+	background-color : white;
+}
+
+#searchContainer {
+	width : 500px;
+	height : 300px;
+	border : 3px solid red;
+	background-color : white;
+	display : flex;
+	flex-direction : column;
+}
+
+#radioBox {
+	width : 100px;
+	height : 30px;
+	
+}
+
+#textBox {
+	width : 300px;
+	height : 50px;
+}
+
+#searchContent {
+	width : 100px;
+	height : 20px;
+	border-radius : 5px;
+	border : 3px solid black;
+	background-color : grey;
+}
+
+#searchContent {
+	width : 100px;
+	height : 20px;
+	border-radius : 5px;
+	border : 3px solid yellow;
+	background-color : skyblue;
+}

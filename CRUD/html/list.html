@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<title>Basic-CRUD-Blog</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/list.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id = "listContainer">
+		<div id = "listTitle">
+			글목록
+		</div>
+		<ol id = "listItems">
+			<li><p class = "title">이건 제목이고</p><p class = "author">이건 글쓴이</p><p class = "timeStamp">이건 타임스탬프</p></li>
+			<li><p class = "title">이건 제목이고</p><p class = "author">이건 글쓴이</p><p class = "timeStamp">이건 타임스탬프</p></li>
+			<li><p class = "title">이건 제목이고</p><p class = "author">이건 글쓴이</p><p class = "timeStamp">이건 타임스탬프</p></li>
+			<li><p class = "title">이건 제목이고</p><p class = "author">이건 글쓴이</p><p class = "timeStamp">이건 타임스탬프</p></li>
+		</ol>
+	</div>
+	
+	<div id = "btnContainer">
+		<a href = "write.html" id = "writeBtn">글 쓰기</a>
+		<div id = "searchContainer">
+			<div id = "radioBox">
+				<input type="radio" class="titleSelect" name="search" value="title">
+  				<label for="title">제목</label><br>
+				<input type="radio" class="titleSelect" name="search" value="author">
+  				<label for="author">작성자</label><br>
+			</div>
+			<div id = "textBox">
+				<input type="text" id = "searchContent">
+				<button id = "searchBtn">검색하기</button>
+			</div>
+			
+		</div>
+	</div>
+	
+
+	
+</body>
+</html>
