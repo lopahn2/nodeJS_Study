@@ -4,7 +4,6 @@ var url = require('url');
 
 
 
-
 var app = http.createServer(function(request, response) {
     var _url = request.url; //사용자가 요청한 값. - 쿼리문을 가져옴
 	var pathName = url.parse(_url, true).pathname;
