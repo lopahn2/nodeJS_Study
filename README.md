@@ -22,3 +22,19 @@
 
 - 2022-03-07 : 레이아웃 짜기 (기능구현 인터페이스만)
 - 2022-03-08 : 대충 라우팅만 구현... 기능은 나중에 구현하자!
+- 2022-03-09 : css가 로딩이 안되는 이유를 찾았다....
+> Hi Brian. Files such as css and pngs etc. are regarded as 'static' or 'public' files. You probably found that when simply viewing your index.html on your >local PC, (without Nodejs), these files were loaded automatically and it was your browser that handled that for you. But with nodejs, you have currently only >coded for index.html, so that in your browser, you can see at http://localhost:3000/ your index.html only.
+>
+>in your browser, if you look at your JavaScript console (F12 in Chrome), you will see these 2 errors (and maybe more)...
+>
+>Resource interpreted as Stylesheet but transferred with MIME type text/html: "http://localhost:3000/styles.css".
+>
+>Resource interpreted as Stylesheet but transferred with MIME type text/html: "http://localhost:3000/main.css".
+>Your browser recognises that these 2 files are required but the node server cannot currently handle the request. Instead the server just returns the index.html >file which the browser knows is not formatted as text/css.
+>
+>So you would need to manually add 'routes' for each of these static files. In a nutshell, it can be done in native nodejs but quite quickly you would find this >is not the way to go. Instead, this is why frameworks like 'Express' are so popular because they have tools built-in, that handle all of this for you.
+>
+>Here are just 2 links that show how complex this can get if you try and do this manually.
+
+아.. express 써야 쉽고 간편하단다... 직접구현은 어렵다고 손수 링크까지 써서 알려주네... 아...
+
