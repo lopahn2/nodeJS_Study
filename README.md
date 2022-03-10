@@ -49,3 +49,5 @@
 `TypeError [ERR_INVALID_CHAR]: Invalid character in header content ["Location"]` <br>
 
 **Ans** -> internal server error occurs when redirect path includes `query strings of non-ascii character(like Japanese)`
+
+💁‍♂️ [form 태그를 이용한 POST 메소드 사용](https://github.com/lopahn2/nodeJS_Study/blob/main/report/form_url.md)
