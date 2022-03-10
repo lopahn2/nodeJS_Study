@@ -20,9 +20,12 @@
 <br>
 <br>
 
-- 2022-03-07 : 레이아웃 짜기 (기능구현 인터페이스만)
-- 2022-03-08 : 대충 라우팅만 구현... 기능은 나중에 구현하자!
-- 2022-03-09 : css가 로딩이 안되는 이유를 찾았다....
+## 2022-03-07 
+레이아웃 짜기 (기능구현 인터페이스만)
+## 2022-03-08 
+대충 라우팅만 구현... 기능은 나중에 구현하자!
+## 2022-03-09 
+- css가 로딩이 안되는 이유를 찾았다....
 > Hi Brian. Files such as css and pngs etc. are regarded as 'static' or 'public' files. You probably found that when simply viewing your index.html on your >local PC, (without Nodejs), these files were loaded automatically and it was your browser that handled that for you. But with nodejs, you have currently only >coded for index.html, so that in your browser, you can see at http://localhost:3000/ your index.html only.
 >
 >in your browser, if you look at your JavaScript console (F12 in Chrome), you will see these 2 errors (and maybe more)...
@@ -37,4 +40,17 @@
 >Here are just 2 links that show how complex this can get if you try and do this manually.
 
 아.. express 써야 쉽고 간편하단다... 직접구현은 어렵다고 손수 링크까지 써서 알려주네... 아...
+- 이전꺼 복습하고 소대껄로 query 사용해서 라우팅 구현해봤음 다시...
 
+## 2022-03-10 
+
+🙋‍♂️ [패키지 매니저 사용하기](https://github.com/lopahn2/nodeJS_Study/blob/main/PM2.md)
+
+🙆‍♂️ GET method 사용시 url의 쿼리스트링이 노출되고 POST method 사용시 노출 안됨. 데이터를 읽어올 때는 get, 작성 후 전송할 때 post 를 쓰는 이유!
+
+🤦‍♂️ 에러 발생과 해결
+`TypeError [ERR_INVALID_CHAR]: Invalid character in header content ["Location"]` <br>
+
+**Ans** -> internal server error occurs when redirect path includes `query strings of non-ascii character(like Japanese)`
+
+💁‍♂️ [form 태그를 이용한 POST 메소드 사용](https://github.com/lopahn2/nodeJS_Study/blob/main/report/form_url.md)
