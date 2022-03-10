@@ -39,5 +39,13 @@
 아.. express 써야 쉽고 간편하단다... 직접구현은 어렵다고 손수 링크까지 써서 알려주네... 아...
 
 - 2022-03-09 : 이전꺼 복습하고 소대껄로 query 사용해서 라우팅 구현해봤음 다시...
-- 2022-03-10 : 패키지 매니저 사용하는거 해봤고 [글 바로가기!](https://github.com/lopahn2/nodeJS_Study/blob/main/PM2.md)
-GET method 사용시 url의 쿼리스트링이 노출되고 POST method 사용시 노출 안됨. 데이터를 읽어올 때는 get, 작성 후 전송할 때 post 를 쓰는 이유!
+- 2022-03-10 
+
+🙋‍♂️ [패키지 매니저 사용하기](https://github.com/lopahn2/nodeJS_Study/blob/main/PM2.md)
+
+🙆‍♂️ GET method 사용시 url의 쿼리스트링이 노출되고 POST method 사용시 노출 안됨. 데이터를 읽어올 때는 get, 작성 후 전송할 때 post 를 쓰는 이유!
+
+🤦‍♂️ 에러 발생과 해결
+`TypeError [ERR_INVALID_CHAR]: Invalid character in header content ["Location"]` <br>
+
+**Ans** -> internal server error occurs when redirect path includes `query strings of non-ascii character(like Japanese)`
