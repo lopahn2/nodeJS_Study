@@ -57,4 +57,4 @@
 
 ## 2022-03-11 
 
-🙋‍ 수정 기능 구현 
+🙋‍ [수정 기능 구현](https://github.com/lopahn2/nodeJS_Study/blob/main/report/update.md)
