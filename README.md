@@ -58,3 +58,12 @@
 ## 2022-03-11 
 
 🙋‍ [수정 기능 구현](https://github.com/lopahn2/nodeJS_Study/blob/main/report/update.md)
+
+🙆‍ [삭제 기능 구현](https://github.com/lopahn2/nodeJS_Study/blob/main/report/delete.md)
+
+🤦‍ 에러 발생과 해결
+`Access to font at 'https://www.goorm.io/goormMainPage/lib/css/font/NotoSansKR-Regular.woff2' from origin 'https://hwany.run.goorm.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.` <br>
+
+`CORS` 오류인데 이에 대한 자세히 설명해놓은 포스팅을 찾아서 첨부!! <br>
+
+[CORS오류의 종류와 해결법](https://evan-moon.github.io/2020/05/21/about-cors/)
