@@ -48,7 +48,7 @@
 
 🙆‍♂️ GET method 사용시 url의 쿼리스트링이 노출되고 POST method 사용시 노출 안됨. 데이터를 읽어올 때는 get, 작성 후 전송할 때 post 를 쓰는 이유!
 
-🤦‍♂️ 에러 발생과 해결
+🤦‍♂️ 에러 발생과 해결 <br>
 `TypeError [ERR_INVALID_CHAR]: Invalid character in header content ["Location"]` <br>
 
 **Ans** -> internal server error occurs when redirect path includes `query strings of non-ascii character(like Japanese)`
@@ -61,7 +61,7 @@
 
 🙆‍ [삭제 기능 구현](https://github.com/lopahn2/nodeJS_Study/blob/main/report/delete.md)
 
-🤦‍ 에러 발생과 해결
+🤦‍ 에러 발생과 해결 <br>
 `Access to font at 'https://www.goorm.io/goormMainPage/lib/css/font/NotoSansKR-Regular.woff2' from origin 'https://hwany.run.goorm.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.` <br>
 
 `CORS` 오류인데 이에 대한 자세히 설명해놓은 포스팅을 찾아서 첨부!! <br>
