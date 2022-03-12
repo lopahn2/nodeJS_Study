@@ -72,6 +72,6 @@
 
 코드 리펙토링 (모듈화) 
 
-URL path에 중요 정보 노출 안되게 하기
+[URL path에 중요 정보 노출 안되게 하기](https://github.com/lopahn2/nodeJS_Study/blob/main/report/URL-Security.md)
 
 JS injection 
