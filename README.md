@@ -67,3 +67,11 @@
 `CORS` 오류인데 이에 대한 자세히 설명해놓은 포스팅을 찾아서 첨부!! <br>
 
 [CORS오류의 종류와 해결법](https://evan-moon.github.io/2020/05/21/about-cors/)
+
+## 2022-03-12
+
+코드 리펙토링 (모듈화) 
+
+URL path에 중요 정보 노출 안되게 하기
+
+JS injection 
