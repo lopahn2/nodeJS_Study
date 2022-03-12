@@ -44,11 +44,11 @@
 
 ## 2022-03-10 
 
-🙋‍♂️ [패키지 매니저 사용하기](https://github.com/lopahn2/nodeJS_Study/blob/main/PM2.md)
+🙎‍♂️ [패키지 매니저 사용하기](https://github.com/lopahn2/nodeJS_Study/blob/main/PM2.md)
 
-🙆‍♂️ GET method 사용시 url의 쿼리스트링이 노출되고 POST method 사용시 노출 안됨. 데이터를 읽어올 때는 get, 작성 후 전송할 때 post 를 쓰는 이유!
+🙋‍♂️ GET method 사용시 url의 쿼리스트링이 노출되고 POST method 사용시 노출 안됨. 데이터를 읽어올 때는 get, 작성 후 전송할 때 post 를 쓰는 이유!
 
-🤦‍♂️ 에러 발생과 해결
+🙆‍♂️ 에러 발생과 해결 <br>
 `TypeError [ERR_INVALID_CHAR]: Invalid character in header content ["Location"]` <br>
 
 **Ans** -> internal server error occurs when redirect path includes `query strings of non-ascii character(like Japanese)`
@@ -57,13 +57,25 @@
 
 ## 2022-03-11 
 
-🙋‍ [수정 기능 구현](https://github.com/lopahn2/nodeJS_Study/blob/main/report/update.md)
+🙎‍♂️ [수정 기능 구현](https://github.com/lopahn2/nodeJS_Study/blob/main/report/update.md)
 
-🙆‍ [삭제 기능 구현](https://github.com/lopahn2/nodeJS_Study/blob/main/report/delete.md)
+🙋‍♂️ [삭제 기능 구현](https://github.com/lopahn2/nodeJS_Study/blob/main/report/delete.md)
 
-🤦‍ 에러 발생과 해결
+🙆‍♂️ 에러 발생과 해결 <br>
 `Access to font at 'https://www.goorm.io/goormMainPage/lib/css/font/NotoSansKR-Regular.woff2' from origin 'https://hwany.run.goorm.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.` <br>
 
 `CORS` 오류인데 이에 대한 자세히 설명해놓은 포스팅을 찾아서 첨부!! <br>
 
 [CORS오류의 종류와 해결법](https://evan-moon.github.io/2020/05/21/about-cors/)
+
+## 2022-03-12
+
+🙎‍♂️ 코드 리펙토링 (모듈화) 
+
+🙋‍♂️ [URL path에 중요 정보 노출 안되게 하기](https://github.com/lopahn2/nodeJS_Study/blob/main/report/URL-Security.md)
+
+🙆‍♂️ [XSS 막기](https://github.com/lopahn2/nodeJS_Study/blob/main/report/XSS.md)
+
+🤷‍♂️ goorm 왜 이렇게 자주 튕기는거야 정말 난 진짜로 이해안돼!
+
+![에러사진](https://user-images.githubusercontent.com/76484900/158021004-a3eea1a2-1ead-4bf6-b48c-25a9ec71df47.png)
