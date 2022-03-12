@@ -74,4 +74,4 @@
 
 [URL path에 중요 정보 노출 안되게 하기](https://github.com/lopahn2/nodeJS_Study/blob/main/report/URL-Security.md)
 
-JS injection 
+[XSS 막기](https://github.com/lopahn2/nodeJS_Study/blob/main/report/XSS.md)
