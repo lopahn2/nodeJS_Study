@@ -1,76 +1,73 @@
-const http = require('http');
-const fs = require('fs');
-const url = require('url');
-
-const templateHTML = (title, list, content) => {
-	let template = 
-		`
-		<!DOCTYPE html>
-		<html>
-			<head>
-				<title>self-following ${title}</title>
-				<meta charset="utf-8" />
-			</head>
-			<body>
-				<h1><a href='/'>화니의 노드세상</a></h1>
-				<h2>${title}</h2>
-				${list}
-				<p>
-				${content}
-				</p>
-			</body>
-		</html>
-		`;
-	return template
-}
-
-const templateList = (fileList) => {
-	let list = `<ul>`;
-	for (let i = 0 ; i < fileList.length; i++){
-		list += `<li><a href='/?id=${fileList[i]}'>${fileList[i]}</a></li>`
-	}
-	list += `</ul>`;
-	return list;
-}
+const http = require("http");
+const fs = require("fs");
+const url = require("url");
+const qs = require("querystring");
 
 
-
-
+const template = require("./htmlModule/template.js");
+ 
 
 const app = http.createServer((request, response) => {
 	let _url = request.url;
-	let pathName = url.parse(_url, true).pathname;
 	let queryData = url.parse(_url, true).query;
-	let title = queryData.id;
-	if (pathName === '/') {
-		if (queryData.id === undefined) {
-			
+	let pathName = url.parse(_url, true).pathname;
+	if (pathName === "/") {
+		let html = template.home();
+		response.writeHead(200);
+		response.end(html);
+	} else if (pathName === "/menu") {
+		if (queryData.id === undefined){
 			fs.readdir('./data', (err, fileList) => {
-				
-				var title = '본부2분대 대표노예들 ㅋㅋㅋ';
-				description = '각자의 개성에 대해 알아가 볼까요?';
-				let list = templateList(fileList);
-				let template = templateHTML(title, list, description);
-				
+				const list_ = template.list(fileList);
+				let html = template.mainHtml(list_,undefined,undefined,	
+				`<a href='/create'>create</a>`);
 				response.writeHead(200);
-				response.end(template);
-			});
+				response.end(html);
+			});	
 		} else {
 			fs.readdir('./data', (err, fileList) => {
-				fs.readFile(`data/${title}`, 'utf8', (err, description) => {
-					
-					let title = queryData.id;
-					let list = templateList(fileList);
-					let template = templateHTML(title, list, description);
-					
+				let fileId = queryData.id;
+				fs.readFile(`data/${fileId}.txt`, 'utf8', (err, data) => {
+					const list_ = template.list(fileList);
+					let html = template.mainHtml(list_, `${fileId}`, data);
 					response.writeHead(200);
-					response.end(template);
+					response.end(html);
 				});
 			});
 		}
-	} else {
-		response.writeHead(404);
-		response.end('이거아닌데~이거아닌데~');
+
+	} else if (pathName === "/create") {
+		let html = template.mainHtml('','create new File', '',
+					`<form action = 'https://hwany.run.goorm.io/create_process' method = 'post'>
+						<p>
+							<input type='text' name = 'title'>
+						</p>
+						<p>
+							<textarea name = 'description'></textarea>
+						</p>
+						<p>
+							<input type='submit'>
+							<!-- 서버에 데이터를 전송할 때 사용한다. -->
+						</p>
+					</form>
+
+					`);
+		response.writeHead(200);
+		response.end(html);
+	} else if (pathName === "/create_process") {
+		let body = '';
+		request.on('data', (data) => {
+			body += data;
+		});
+		request.on('end', () => {
+			let post = qs.parse(body);
+			let fileName = post.title;
+			let description = post.description;
+			fs.writeFile(`data/${fileName}.txt`, description, 'utf8', (err) => {
+				response.writeHead(302, {Location:`/menu`});
+				response.end();
+			});
+		});
 	}
 	
 	
