@@ -79,3 +79,21 @@
 🤷‍♂️ goorm 왜 이렇게 자주 튕기는거야 정말 난 진짜로 이해안돼!
 
 ![에러사진](https://user-images.githubusercontent.com/76484900/158021004-a3eea1a2-1ead-4bf6-b48c-25a9ec71df47.png)
+
+## 2022-03-22
+
+🙎‍♂️  격리 끝나고 머리 부여싸매면서 다시 기억해내고 혼자해보기
+
+🙋‍♂️ 모듈 파일 exports를 export라 해서 10분 해매기
+
+🙆‍♂️ 웹 페이지 만든 순서
+1. 기본적인 UI 구성
+2. main.js 에 필요한 모듈 require
+3. UI를 template.js로 옮겨서 모듈화
+4. pathName으로 큰 틀로 라우팅
+5. querydata 이용해서 파일 읽어오기 구현
+6. create UI 구현
+7. create form 형식 이용해서 create_process 루트로 넘김
+8. create에서 form 형식으로 넘어온 데이터 querystring 모듈이용해 파일 쓰기 구현
+
+🤷‍♂️ 같은 과정 10번만 반복하면 익숙해질듯?
