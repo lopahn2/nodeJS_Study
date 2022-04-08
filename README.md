@@ -136,3 +136,35 @@ delete 살짝 설렜어 난 빰빠빰 또 까먹었어 빰빠빰
 
 🙎‍ 기존에 만들어 놓았던 CRUD 블로그를 express.js 프레임워크를 이용해 깔쌈하게 바꿔보았다. 책 보면서 따라한게 다라서 내일 도서관에서 정리하고 나서 
 스터디 레포에 정리해야지
+
+## 2022-04-08 
+🙎‍ 책 내용 정리! [express](https://github.com/lopahn2/nodeJS_Study/blob/main/report/Express.md)
+<br>
+
+🙋‍ **body-parser middleware** <br> 
+
+Post 방식으로 전송한 데이터를 내부적으로 분석해서 그 결과를 request에 담아서 보내주는 미들웨어이다.
+<br>
+
+```js
+cosnt bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended : false }));
+
+app.post('/create_process', (req, res) => {
+  let post = req.body;
+  ...
+});
+```
+
+🤷‍ **Compression middleware** <br>
+
+웹 서버가 웹 브라우저에게 응답할 때 데이터를 압축해서 보낼 수 있도록 해주는 미들웨어이다.
+<br>
+```js
+const compression = require('compression');
+
+app.use(compression());
+```
+
+
