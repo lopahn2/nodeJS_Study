@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+    <title>About</title><!--제목이 About이다.-->
+  </head>
+  <body>
+    <h1>글 목록</h1><!--웹페이지 안에 About을 작성한다.-->
+	<div id="list-up">
+		
+	</div>  
+	<script>
+		const data = '/data';
+		const fs = require('fs');
+
+		let list = `<ul>`;
+		const listContainer = document.querySelector('#list-up')
+
+		fs.readdir(data, (err, fileList) => {
+			fileList.forEach((file) => {
+				fs.readFile(file, 'utf8', (err, content) => {
+					list += `<li>${content}</li>`;
+				});
+			});
+			list += `</ul>`;
+			listContainer.innerHTML = list;
+		});
+
+
+		console.log("hello world!");
+	</script>
+  </body>
+</html>

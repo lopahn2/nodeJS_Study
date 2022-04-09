@@ -1,0 +1,17 @@
+.red {
+	display : block;
+	width : 1000px;
+	text-align : center;
+	margin : 10px auto;
+	color : red;
+}
+
+.start {
+	color : black;
+	display : block;
+	width : 400px;
+	margin : 20px auto;
+	font-size : 100px;
+	font-weight : bold;
+	text-decoration : none;
+}
