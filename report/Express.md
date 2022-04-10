@@ -1,4 +1,7 @@
 # express
+```js
+npm install express --save
+```
 
 ## Hello World?
 ```js
