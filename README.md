@@ -172,4 +172,7 @@ app.use(compression());
 
 🙋‍ html 파일들을 node 모듈을 이용하면서 제어할 수 있도록 template.js로 관리하면서, css도 적용할 수 있도록 해봐야겠다. 
 
+## 2022-04-10
+🙎‍ [라우터 파일로 관리하기](https://github.com/lopahn2/nodeJS_Study/blob/main/report/RouteFile.md)
 
+🙋‍ 이제 그냥 쿠키랑 세션으로 넘어가야겠다. 급하다 급해!
