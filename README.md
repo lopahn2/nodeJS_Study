@@ -176,3 +176,6 @@ app.use(compression());
 🙎‍ [라우터 파일로 관리하기](https://github.com/lopahn2/nodeJS_Study/blob/main/report/RouteFile.md)
 
 🙋‍ 이제 그냥 쿠키랑 세션으로 넘어가야겠다. 급하다 급해!
+
+## 2022-04-11
+🙎‍ [쿠키 생성과 읽기](https://github.com/lopahn2/nodeJS_Study/blob/main/report/Cookie_Create_Read.md)
