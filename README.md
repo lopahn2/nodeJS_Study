@@ -179,3 +179,25 @@ app.use(compression());
 
 ## 2022-04-11
 🙎‍ [쿠키 생성과 읽기](https://github.com/lopahn2/nodeJS_Study/blob/main/report/Cookie_Create_Read.md)
+
+## 2022-04-12
+🙎‍ [쿠키의 활용](https://github.com/lopahn2/nodeJS_Study/blob/main/report/Cookie_Options.md)
+<br>
+🙋‍ 쿠키는 사용자의 개인화를 위한 도구이지 인증을 쿠키로 하면 안된다. 네트워크도구에 떡하니 내용이 찍히기 때문! 
+따라서 이는 세션으로 인증을 구현하는데 인증을 구현하는 과정정도는 쿠키로 해봤다. 배워봤으니까 써먹어봐야지!
+<br>
+
+**<인증 기능 구현>** <br>
+인증 기능을 구현할 때에는 쿠키를 사용하면 위험하다.<br>
+콘솔의 네트워크도구에서 쿠키값을 바로 볼 수 있기 때문에.<br>
+
+1. 로그인 화면 만들기<br>
+2. 로그인 라우터 만들기<br>
+3. 로그인 프로세스 라우터에서 로그인 쿠키 처리하기<br>
+4. 로그인 상태 체크<br>
+5. 로그아웃 구현<br>
+6. 접근제어<br>
+
+
+
+
