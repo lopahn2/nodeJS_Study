@@ -1,4 +1,4 @@
-console.log('Hello no deamon');
+
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
@@ -6,12 +6,39 @@ var qs = require('querystring');
 var template = require('./lib/template.js');
 var path = require('path');
 var sanitizeHtml = require('sanitize-html');
+const cookie = require('cookie');
+
+function authIsOwner(request, response) {
+	let isOwner = false;
+	let cookies = {};
+	
+	if (request.headers.cookie) {
+		cookies = cookie.parse(request.headers.cookie);
+	}
+	
+	if (cookies.email === 'lopahn2@gmail.com' && cookies.password === "123456") {
+		isOwner = true;
+	}
+	return isOwner;
+}
+
+function authStatusUI (request, response) {
+	let authStatusUI = '<a href="/login">login</a>';
+	if (authIsOwner(request, response)) {
+		authStatusUI = '<a href="/logout_process">logout</a>';
+	}
+	return authStatusUI;
+}
 
 var app = http.createServer(function(request, response) {
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
     var pathname = url.parse(_url, true).pathname;
-
+	
+	let isOwner = authIsOwner(request, response);
+	
+	
+	
     if(pathname === '/') {
         if(queryData.id === undefined) {
             fs.readdir('./data', function(error, filelist) {
@@ -20,7 +47,7 @@ var app = http.createServer(function(request, response) {
                 var list = template.list(filelist);
                 var html = template.HTML(title, list,
                     `<h2>${title}</h2><p>${description}</p>`,
-                    `<a href="/create">create</a>`
+                    `<a href="/create">create</a>`, authStatusUI(request, response)
                 );
                 response.writeHead(200);
                 response.end(html);
@@ -42,7 +69,7 @@ var app = http.createServer(function(request, response) {
                         <form action="delete_process" method="post">
                             <input type="hidden" name="id" value="${sanitizedTitle}">
                             <input type="submit" value="delete">
-                        </form>`
+                        </form>`,authStatusUI(request, response)
                     );
                     response.writeHead(200);
                     response.end(html);
@@ -50,6 +77,10 @@ var app = http.createServer(function(request, response) {
             });
         }
     } else if(pathname === '/create') {
+		if (authIsOwner(request, response) === false) {
+			response.end("로그인하십쇼.");
+			return false;
+		}
         fs.readdir('./data', function(error, filelist) {
             var title = 'WEB - create';
             var list = template.list(filelist);
@@ -63,25 +94,34 @@ var app = http.createServer(function(request, response) {
                         <input type="submit">
                     </p>
                 </form>
-            `, '');
+            `, '',authStatusUI(request, response));
             response.writeHead(200);
             response.end(html);
         });
     } else if(pathname === '/create_process') {
-        var body = '';
-        request.on('data', function(data) {
-            body = body + data;
-        });
-        request.on('end', function() {
-            var post = qs.parse(body);
-            var title = post.title;
-            var description = post.description;
-            fs.writeFile(`data/${title}`, description, 'utf8', function(err) {
-                response.writeHead(302, {Location: `/?id=${title}`});
-                response.end();
-            });
-        });
+        if (authIsOwner(request, response) === false) {
+			response.end("로그인하십쇼.");
+			return false;
+		} else {
+			var body = '';
+			request.on('data', function(data) {
+				body = body + data;
+			});
+			request.on('end', function() {
+				var post = qs.parse(body);
+				var title = post.title;
+				var description = post.description;
+				fs.writeFile(`data/${title}`, description, 'utf8', function(err) {
+					response.writeHead(302, {Location: `/?id=${title}`});
+					response.end();
+				});
+			});
+		}
     } else if(pathname === '/update') {
+		if (authIsOwner(request, response) === false) {
+			response.end("로그인하십쇼.");
+			return false;
+		}
         fs.readdir('./data', function(error, filelist) {
             var filteredId = path.parse(queryData.id).base;
             fs.readFile(`data/${filteredId}`, 'utf8', function(err, description) {
@@ -100,13 +140,17 @@ var app = http.createServer(function(request, response) {
                         </p>
                     </form>
                     `,
-                    `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`
+                    `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`,authStatusUI(request, response)
                 );
                 response.writeHead(200);
                 response.end(html);
             });
         });
     } else if(pathname === '/update_process') {
+		if (authIsOwner(request, response) === false) {
+			response.end("로그인하십쇼.");
+			return false;
+		}
         var body = '';
         request.on('data', function(data) {
             body = body + data;
@@ -124,6 +168,10 @@ var app = http.createServer(function(request, response) {
             });
         });
     } else if(pathname === '/delete_process') {
+		if (authIsOwner(request, response) === false) {
+			response.end("로그인하십쇼.");
+			return false;
+		}
         var body = '';
         request.on('data', function(data) {
             body = body + data;
@@ -137,9 +185,72 @@ var app = http.createServer(function(request, response) {
                 response.end();
             });
         });
-    } else {
+    } else if (pathname === '/login') {
+		fs.readdir('./data', (err, fileList) => {
+			let title = 'Login';
+			let list = template.list(fileList);
+			let html = template.HTML(title, list, `
+			<form action = "/login_process" method = "post">
+				<p><input type="text" name="email" placeholder = "email"></p>
+				<p><input type="password" name="password" placeholder = "password"></p>
+				<p><input type="submit" value = "login!"></p>
+			
+			`, `<a href = "/create">create!</a>`);
+			response.writeHead(200);
+			response.end(html);
+		});
+		
+	} else if (pathname === '/login_process') {
+		var body = '';
+        request.on('data', function(data) {
+            body = body + data;
+        });
+        request.on('end', function() {
+            var post = qs.parse(body);
+            var email = post.email;
+            var password = post.password;
+			if (email === "lopahn2@gmail.com" && password === "123456") {
+				response.writeHead(302, {
+					'Set-Cookie' : [
+						`email=${email}`,
+						`password = ${password}`,
+						`nickname=hwany`
+					],
+					Location : '/'
+							   });
+			response.end();
+			} else {
+				response.writeHead(200);
+				response.end("who are you?");
+			}
+            
+        });
+	} else if (pathname === '/logout_process') {
+		var body = '';
+        request.on('data', function(data) {
+            body = body + data;
+        });
+		
+		 request.on('end', function() {
+            var post = qs.parse(body);
+            
+			
+			response.writeHead(302, {
+				'Set-Cookie' : [
+					`email=; Max-Age = 0`,
+					`password =; Max-Age = 0`,
+					`nickname=; Max-Age = 0`
+				], 
+				Location : '/'
+						   });
+			response.end();
+		    
+        });
+		
+	}
+	else {
         response.writeHead(404);
         response.end('Not found');
     }
 });
-app.listen(3000);
+app.listen(80);
