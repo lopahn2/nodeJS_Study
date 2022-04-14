@@ -199,5 +199,8 @@ app.use(compression());
 6. 접근제어<br>
 
 
+## 2022-04-14
+🙎‍ [세션의 모든..것?](https://github.com/lopahn2/nodeJS_Study/blob/main/report/Session.md)
 
-
+<br>
+🙋‍ 이제 진짜 왠만한거는 다 만들 수 있을거 같아... 풀스택으로 블로그 하나 제대로 만들어보자! 한 일주일이면 되겠지? 
