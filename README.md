@@ -199,5 +199,12 @@ app.use(compression());
 6. 접근제어<br>
 
 
+## 2022-04-14
+🙎‍ [세션의 모든..것?](https://github.com/lopahn2/nodeJS_Study/blob/main/report/Session.md)
 
+<br>
+🙋‍ 이제 진짜 왠만한거는 다 만들 수 있을거 같아... 풀스택으로 블로그 하나 제대로 만들어보자! 한 일주일이면 되겠지? 
 
+## 2022-04-15 mileston Blog CRUD 1일차
+🙎‍ milestone을 사용해봤다. 이거 섹시한데? 오 이거 섹시한데? 오 이거 레오 섹시 한데? 이거 오 레오 한데? 섹시 <br>
+그저 '/' 껍데기만 구현했다. ㅋ. ㅋ. ㅋ.
