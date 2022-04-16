@@ -1,0 +1,184 @@
+body {
+	width : 100vw;
+	height : 100vh;
+	margin : 0;
+	display : flex;
+	flex-direction : row;
+	
+	overflow : hidden;
+}
+
+#banner-wrap {
+	position : relative;
+	width : 40vw;
+	height : 100vh;
+	margin : 0;
+	top : 0;
+	left : 0;
+}
+
+#banner-container {
+	width: 30vw;
+	height: 0;
+	
+	border-right: 15vw solid transparent;
+	border-top: 100vh solid rgb(15,76,130);	
+}
+
+#home-icon {
+	width : 100px;
+	padding : 20px;
+	
+	font-size : 30px;
+	
+	position : absolute;
+	top : 0;
+	left : 0;
+}
+
+#home-icon > a {
+	text-decoration : none;
+	color : white;
+}
+
+
+
+#content-container {
+	width : 400px;
+	height : 200px;
+	
+	position : absolute;
+	top : 300px;
+	left : 100px;
+}
+
+#text-box {
+	text-align : center;
+	color : white;
+}
+
+#text-box > sapn {
+	font-size : 40px;
+	font-weight : bold;
+}
+
+#login-box {
+	width : 400px;
+	height : 40px;
+	border : 1px solid white;
+	
+	padding-top : 13px;
+	
+	font-size : 20px;
+}
+
+#login-box > a{
+	text-decoration : none;
+	color : white;
+}
+
+#signUp-contents-wrap {
+	width : 60vw;
+	height : 100%;
+	
+	
+	
+	display : flex;
+	justify-content : center;
+	align-items : center;
+	
+}
+
+#signUp-contents-container {
+	width : 35vw;
+	height : 40vw;
+	
+	border-radius : 10px;
+	box-shadow: 5px 2px 2px rgba(0,0,0,0.2);
+	
+	display : flex;
+	flex-direction : column;	
+	justify-content : center;
+	align-items : center;
+}
+
+.signUp-contents {
+	width : 90%;
+	height : 15%;
+	
+	margin : 5px;
+}
+#top-banner {
+	text-align : center;
+	font-weight : bold;
+	padding-top : 30px;
+}
+#top-banner > span {
+	font-size : 30px;
+}
+#user-name {
+	display : flex;
+	flex-direction : row;
+}
+.name-container {
+	width : 50%;
+	font-size : 20px;
+}
+.name-container > input {
+	width : 95%;
+	height : 40px;
+	border : 0.5px solid gray; 
+	border-radius : 3px;
+	padding : 5px;
+	font-size : 15px;
+}
+.name-container > span {
+	font-weight : bold;
+}
+
+#user-email {
+	font-size : 20px;
+}
+#user-email > span {
+	font-weight : bold;
+}
+#user-email > input {
+	width : 98%;
+	height : 40px;
+	border : 0.5px solid gray; 
+	border-radius : 3px;
+	padding : 5px;
+	font-size : 15px;
+}
+
+#user-password {
+	font-size : 20px;
+}
+#user-password > span {
+	font-weight : bold;
+}
+#user-password > input {
+	width : 98%;
+	height : 40px;
+	border : 0.5px solid gray; 
+	border-radius : 3px;
+	padding : 5px;
+	font-size : 15px;
+}
+
+#sign-up-button {
+	width : 80%;
+	height : 50px;
+	background-color : rgb(51,153,242);
+	border-radius : 1px;
+	border: 0px solid black;
+	text-align : center;
+	margin : 20px auto;
+	
+	font-size : 30px;
+	
+}
+#sign-up-button > a{
+	text-decoration : none;
+	color : white
+}

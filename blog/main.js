@@ -8,6 +8,10 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + "/html/index.html");
 });
 
+app.get('/signup', (req, res) => {
+	res.sendFile(__dirname + "/html/signUp.html");
+});
+
 app.listen(80);
 
 
