@@ -106,7 +106,7 @@ body {
 	width : 90%;
 	height : 15%;
 	
-	margin : 5px;
+	margin : 30px;
 }
 #top-banner {
 	text-align : center;
@@ -166,7 +166,9 @@ body {
 	font-size : 15px;
 }
 
-#sign-up-button {
+#sign-up-button > input{
+	display : block;
+	
 	width : 80%;
 	height : 50px;
 	background-color : rgb(51,153,242);
@@ -176,9 +178,6 @@ body {
 	margin : 20px auto;
 	
 	font-size : 30px;
-	
-}
-#sign-up-button > a{
-	text-decoration : none;
 	color : white
+	
 }

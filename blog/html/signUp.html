@@ -35,29 +35,33 @@
 						If someone knows your name and email, they can get your password right away, so don't sign up with what you actually use
 					</p>
 				</div>
-				<div class="signUp-contents" id="user-name">
-					<div class ="name-container" id="first-name">
-						<span>FirstName</span><br>
-						<input type="text" placeholder="your first name">
+				<form action="/signup_process" method="post">
+					<div class="signUp-contents" id="user-name">
+						<div class ="name-container" id="first-name">
+							<span>FirstName</span><br>
+							<input type="text" placeholder="your first name" name="fname">
+						</div>
+						<div class ="name-container" id="last-name">
+							<span>LastName</span><br>
+							<input type="text" placeholder="your last name" name="lname">
+						</div>
 					</div>
-					<div class ="name-container" id="last-name">
-						<span>LastName</span><br>
-						<input type="text" placeholder="your last name">
+					<div class="signUp-contents" id="user-email">
+						<span>Email</span><br>
+						<input type="text" placeholder="your Email Address" name="email">
 					</div>
-				</div>
-				<div class="signUp-contents" id="user-email">
-					<span>Email</span><br>
-					<input type="text" placeholder="your Email Address">
-				</div>
-				<div class="signUp-contents" id="user-password">
-					<span>Password</span><br>
-					<input type="password" placeholder="your Password">
-				</div>
-				<div class="signUp-contents">
-					<div id="sign-up-button">
-						<a href="/">Sign UP</a>	
+					<div class="signUp-contents" id="user-password">
+						<span>Password</span><br>
+						<input type="password" placeholder="your Password" name="password">
 					</div>
-				</div>
+					<div class="signUp-contents">
+						<div id="sign-up-button">
+							<input type="submit" value = "SignUP!">
+						</div>
+					</div>
+				</form>
+				
+				
 			</div>
 		</div>
     </body>
