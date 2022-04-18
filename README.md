@@ -212,6 +212,8 @@ app.use(compression());
 🙎‍ sign up 화면을 구현했다. 내일은 기능 구현할차례! <br>
 그리고 생각해봤는데 아이디랑 비밀번호 찾는거 핸드폰 인증 API 땡겨와서 해볼까..? 돈안들겠지? ㅋㅋ
 ## 2022-04-17 mileston Blog CRUD 3일차
-🙎‍ my sql 설정하기 [mysql](https://github.com/lopahn2/nodeJS_Study/blob/main/report/MySql.md) <br>
+🙎‍ mysql 설정하기 [mysql](https://github.com/lopahn2/nodeJS_Study/blob/main/report/MySql.md) <br>
 🙋‍ 진짜 설정하는데 애먹었다. 싸지방 정말 힘들다 ... 실습책 가지고 sql 좀 조물딱 거려보고 바로 blog에 적용해보자!
-
+## 2022-04-18 mileston Blog CRUD 4일차
+🙎‍ mysql 설정 하고 회원가입시 db저장 기능 구현 완료 <br>
+🙋‍ 하는김에 비밀번호 암호화까지 설정완료! 훈련하느라 피곤하다... 한시간만 하고 자야지... <br>
