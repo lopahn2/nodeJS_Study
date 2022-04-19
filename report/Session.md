@@ -35,11 +35,11 @@ npm install -s express-session
 const session = require("express-session");
 
 // 세션 미들웨어 등록하기
-app.use(session{
+app.use(session({
 	secret : '다른사람에게 노출되선 안되고 자신만 알고싶은 내용',
 	resave: false,
 	saveUninitialized : true
-});
+}));
 ```
 
 ### 옵션명
@@ -74,12 +74,12 @@ npm install session-file-store
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
-app.use(session{
+app.use(session({
 	secret : '다른사람에게 노출되선 안되고 자신만 알고싶은 내용',
 	resave: false,
 	saveUninitialized : true,
 	store : FileStore()
-});
+}));
 ```
 
 🙆‍♂️ 이러면 디렉터리에 json 확장자 명을 가진 세션파일이 생성된다.
