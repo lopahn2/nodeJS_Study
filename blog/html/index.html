@@ -11,16 +11,18 @@
 			<div id = "login-container">
 				<p id="login-title">Hwany's Blog</p>
 				<div id = "login-container-component">
-	
-					<p>
-						<input type="text" placeholder="Enter your Id" class = "login-component">
-					</p>
-					<p>
-						<input type="password" placeholder="Enter your password" class = "login-component">
-					</p>
-					<p>
-						<a href="/" id = "login-button">Login Now</a>
-					</p>
+					<form action="user_check" method="post">
+						<p>
+							<input type="text" name="email" placeholder="Enter your Email" class = "login-component">
+						</p>
+						<p>
+							<input type="password" name="password" placeholder="Enter your password" class = "login-component">
+						</p> 
+						<p>
+							<input type="submit" value="Login Now" id="login-button">
+						</p>	
+					</form>
+					
 					<p>
 						<a href="/signUp" class="customer-support-component">Sign up</a>    <a class="customer-support-component">Find ID</a>   <a class="customer-support-component">Find P/W</a>
 					</p>

@@ -1,0 +1,47 @@
+body {
+	display :flex;
+	flex-direction : column;
+	
+	align-items : center;
+	
+	width : 100vw;
+	height : 100vh;
+	margin : 0;
+}
+
+#header {
+	
+	
+	width : 100vw;
+	height : 20vh;
+	
+	background-image : url("../goodguns.jpg");
+	background-size : contain;
+	background-repeat : no-repeat;
+	background-position : center center;
+}
+
+#menu {
+	display : block;
+	
+	width : 100vw;
+	height : 3vh;
+	
+	border-top : 2px solid grey;
+	border-bottom : 2px solid grey;
+	
+	text-align : center;
+	
+	font-size : 20px;
+}
+
+#welcome {
+	width : 60vw;
+	height : 60vh;
+	
+	
+	background-image : url("../who_are_you.gif");
+	background-size : contain;
+	background-repeat : no-repeat;
+	background-position : center center;
+}
