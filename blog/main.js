@@ -1,17 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
+const template = require('./template/template.js');
 
 const app = express();
 
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
+
 app.use(session({
 	secret : 'hwany wanna go home',
 	resave: false,
 	saveUninitialized : true,
-	store : FileStore()
+	store : FileStore(),
+	maxAge  : new Date(Date.now() + 3600000)
 }));
 
 const mysql = require('mysql');
@@ -36,7 +39,7 @@ app.use(express.static(__dirname + "/img"));
 
 
 app.get('/', (req, res) => {
-	console.log(req.session.isLogin);
+	
 	if (req.session.isLogin === true) {
 		res.redirect('/home');
 	} else {
@@ -50,8 +53,10 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
+	
 	if (req.session.isLogin === true){
-		res.sendFile(__dirname + "/html/home.html");	
+		let html = template.home(req.session.N_NAME) 
+		res.send(html);	
 	} else {
 		res.write("<script>alert('로그인 안하면 못들어가 바보야')</script>");
 		res.write("<script>window.location=\"/\"</script>");
@@ -60,6 +65,16 @@ app.get('/home', (req, res) => {
 	
 });
 
+app.get('/dashboard', (req, res) => {
+	if (req.session.isLogin === true){
+		let html = template.dashboard(req.session.N_NAME) 
+		res.send(html);	
+	} else {
+		res.write("<script>alert('로그인 안하면 못들어가 바보야')</script>");
+		res.write("<script>window.location=\"/\"</script>");
+		res.end();
+	}
+});
 
 
 app.post('/signup_process', (req,res) => {
@@ -73,13 +88,15 @@ app.post('/signup_process', (req,res) => {
 	
 	db.query(`INSERT INTO user (F_NAME, L_NAME, N_NAME, EMAIL, PASSWORD, SIGN_IN_TIME) VALUES(?,?,?,?,?,NOW())`,[fname, lname, nickName, email, password]), (err, rows, field) => {
 		if (err) throw err;
-		
-		console.log(rows, field);
-		
 	};
 	
 	res.redirect('/');
 	
+});
+
+app.post('/signout_process', (req, res) => {
+	req.session.destroy();
+	res.redirect('/');
 });
 
 app.post('/user_check', (req, res) => {
@@ -88,8 +105,7 @@ app.post('/user_check', (req, res) => {
 	let password = crypto.createHash('md5').update(post.password).digest('base64');;
 	
 	db.query(`SELECT * FROM user where email= ? and password = ?`,[email, password],(err, result) => {
-
-		if (result===[] || err) {
+		if (result.length === 0) {
 			res.write("<script>alert('등록되지 않은 사용자거나 비밀번호가 틀렸어')</script>");
 			res.write("<script>window.location=\"/\"</script>");
 			res.end();
@@ -106,33 +122,3 @@ app.post('/user_check', (req, res) => {
 
 
 app.listen(80);
-
-
-/*
-const express = require("express");
-const server = express();
-
-server.use(express.static(__dirname + "/public"));
-server.use(express.static(__dirname + "/script"));
-
-server.get("/", (req, res) => {
- 
-  res.sendFile(__dirname + "/html/index.html");
-});
-
-server.get("/about", (req, res) => {
-	res.sendFile(__dirname +"/html/about.html");
-});
-
-/*
-server.use((req, res) => {
-  res.sendFile(__dirname + "/html/error.html");
-});
-*/
-/*
-server.listen(80, (err) => {
-  if (err) return console.log(err);
-  
-});
-
-*/

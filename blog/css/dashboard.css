@@ -40,15 +40,33 @@ a {
 	font-size : 20px;
 }
 
-#welcome {
+#dashboard {
 	width : 60vw;
 	height : 60vh;
 	
 	
-	background-image : url("../who_are_you.gif");
+	border : 2px solid red;
+}
+
+.content {
+	width : 200px;
+	height : 300px;
+	border : 2px solid blue;
+	
+	display : flex;
+	flex-direction : column;
+	
+	margin : 15px;
+	
+}
+
+.thumbnail {
+	background-image : url("../goodguns.jpg");
 	background-size : contain;
 	background-repeat : no-repeat;
 	background-position : center center;
+	
+	
 }
 
 #signout_btn {

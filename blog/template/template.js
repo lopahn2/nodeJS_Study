@@ -1,0 +1,46 @@
+module.exports = {
+    home : function (nickName) {
+        return`
+		<!doctype html>
+		<html>
+			<head>
+				<title>Hwany-Blog</title>
+				<meta charset="utf-8">
+				<link rel="stylesheet" href="../home.css" />
+			</head>
+			<body>
+				<div id="header"></div>
+				<p id="menu"><a href="/dashboard">방명록</a> | <a>체팅방 입장</a> | <a>방문자기록</a> | ${nickName}님 환영합니다.</p>
+				<form action="/signout_process" method ="post"><input type="submit" value="로그아웃" id ="signout_btn"></form>
+				<div id="welcome"></div>
+			</body>
+		</html>
+		`
+    },
+	dashboard : function (nickName) {
+		return`
+		<!doctype html>
+		<html>
+			<head>
+				<title>Hwany-Blog</title>
+				<meta charset="utf-8">
+				<link rel="stylesheet" href="../dashboard.css" />
+			</head>
+			<body>
+				<div id="header"></div>
+				<p id="menu"><a href="/home">뒤로가기</a> | <a>체팅방 입장</a> | <a>방문자기록</a> | ${nickName}님이 쓴 글들입니다.</p>
+				<form action="/signout_process" method ="post"><input type="submit" value="로그아웃" id ="signout_btn"></form>
+				<div id="dashboard">
+					<div class = "content">
+						<div class = "thumbnail"></div>
+						<div class = "content-description">
+							<p class = "title">이건 제목이야</p>
+							<p class = "subtitle">이 글의 내용은 말이야...</p>
+						</div>
+					</div>
+				</div>
+			</body>
+		</html>
+		`
+	}
+}
