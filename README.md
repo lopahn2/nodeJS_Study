@@ -157,7 +157,7 @@ app.post('/create_process', (req, res) => {
 });
 ```
 
-🤷‍ **Compression middleware** <br>
+🙆‍ **Compression middleware** <br>
 
 웹 서버가 웹 브라우저에게 응답할 때 데이터를 압축해서 보낼 수 있도록 해주는 미들웨어이다.
 <br>
@@ -221,3 +221,27 @@ app.use(compression());
 🙎‍ 로그인 실패시 / 로그인 성공시 이동 페이지 구현완료 <br>
 🙋‍ 홈페이지 능동적으로 만들기 위해서 모듈화시키기 (텍스트로 만들어 만들어 버려 버려)<br>
 내일은 CRUD 본격적으로 구현해보자.
+## 2022-04-20 mileston Blog CRUD 6일차
+🙎‍ 초반에 로그인기능 중 예외처리 못한게 있어서 분기점을 수정했다. <br>
+```js
+db.query(`SELECT * FROM user where email= ? and password = ?`,[email, password],(err, result) => {
+		if (result.length === 0) {
+			res.write("<script>alert('등록되지 않은 사용자거나 비밀번호가 틀렸어')</script>");
+			res.write("<script>window.location=\"/\"</script>");
+			res.end();
+		} else {
+			req.session.isLogin = true;
+			req.session.N_NAME = result[0].N_NAME;
+			req.session.save();
+			
+			res.redirect('/home');
+		}
+	});
+```
+
+🙋‍ app.post 로 라우터를 처리하고 싶으면 꼭... form 태그로 감싸자.. 왜 a 태그로 해서 바보같이... <br>
+
+🙆‍ session maxAge를 설정안해서 세션이 사라지는게 아니라 nodejs 서버가 재구동 될 때마다 ( 수정사항이 생길 때 마다 ) session이 사라지는 것이다. 새로고침이나 url 이동등으로 사라지는게 아님! <br>
+
+🤷‍ dashboard 게시글은 float을 이용해서 한 번 해보자! 그럼 더 이쁠거같은데? 물론 UI는 난 모르겠다 ㅋㅋ 
+
