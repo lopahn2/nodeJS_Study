@@ -44,13 +44,12 @@ a {
 	width : 60vw;
 	height : 60vh;
 	
-	
 	border : 2px solid red;
 }
 
 .content {
 	width : 200px;
-	height : 300px;
+	height : fit-content;
 	border : 2px solid blue;
 	
 	display : flex;
@@ -61,6 +60,8 @@ a {
 }
 
 .thumbnail {
+	width : 200px;
+	height : 100px;
 	background-image : url("../goodguns.jpg");
 	background-size : contain;
 	background-repeat : no-repeat;

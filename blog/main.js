@@ -2,20 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const template = require('./template/template.js');
-
-const app = express();
+const multer = require('multer');
+const fs = require('fs');
 
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
-
-app.use(session({
-	secret : 'hwany wanna go home',
-	resave: false,
-	saveUninitialized : true,
-	store : FileStore(),
-	maxAge  : new Date(Date.now() + 3600000)
-}));
+const app = express();
 
 const mysql = require('mysql');
 const db = mysql.createConnection({
@@ -30,12 +23,44 @@ db.connect((err) => {
 	console.log("connected!")
 });
 
+fs.readdir('uploads', (error) => {
+    // uploads 폴더 없으면 생성
+    if (error) {
+        fs.mkdirSync('uploads');
+    }
+})
 
+const fileStorage = multer.diskStorage({
+	destination : (req, file, cb) => {
+		cb(null, 'uploads/');
+	},
+	filename : (req, file, cb) => {
+		cb(null, file.filename + '-' + file.originalname);
+	}
+});
+const fileFilter = (req,file,cb) => { // 확장자 필터링 
+	if(file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg'){
+		cb(null,true); // 해당 mimetype만 받겠다는 의미 
+	}
+	else{ // 다른 mimetype은 저장되지 않음 
+		cb(null,false);
+	}
+};
+
+app.use(multer({storage :fileStorage, fileFilter:fileFilter}).single('image')); // 라우터 
+
+app.use(session({
+	secret : 'hwany wanna go home',
+	resave: false,
+	saveUninitialized : true,
+	store : FileStore(),
+	maxAge  : new Date(Date.now() + 3600000)
+}));
 
 app.use(bodyParser.urlencoded({ extended : false }));
 app.use(express.static(__dirname + "/css"));
 app.use(express.static(__dirname + "/img"));
-
+app.use(express.static(__dirname + "/uploads"));
 
 
 app.get('/', (req, res) => {
@@ -67,7 +92,7 @@ app.get('/home', (req, res) => {
 
 app.get('/dashboard', (req, res) => {
 	if (req.session.isLogin === true){
-		let html = template.dashboard(req.session.N_NAME) 
+		let html = template.dashboard(req.session.N_NAME,"");
 		res.send(html);	
 	} else {
 		res.write("<script>alert('로그인 안하면 못들어가 바보야')</script>");
@@ -76,6 +101,16 @@ app.get('/dashboard', (req, res) => {
 	}
 });
 
+app.get('/create', (req, res) => {
+	if (req.session.isLogin === true){
+		let html = template.create(req.session.N_NAME);
+		res.send(html);	
+	} else {
+		res.write("<script>alert('로그인 안하면 못들어가 바보야')</script>");
+		res.write("<script>window.location=\"/\"</script>");
+		res.end();
+	}
+});
 
 app.post('/signup_process', (req,res) => {
 	let post = req.body;
@@ -118,6 +153,22 @@ app.post('/user_check', (req, res) => {
 		}
 	});
 	
+});
+
+app.post('/create_process', (req, res) => {
+	const post = req.body;
+	const image = req.file;
+	const imageUrl = image.path;
+	db.query(`INSERT INTO contents (N_NAME, TITLE, DESCRIPTION, IMGSCR) VALUES(?,?,?,?)`, [req.session.N_NAME, post.title, post.description, imageUrl], (err, result) => {
+		if (err) throw err;
+		
+		if(result.length === 0) {
+			res.write("<script>alert('오류발생')</script>");
+			res.redirect('/home');
+		} else {
+			res.redirect('/home');
+		}
+	});
 });
 
 
