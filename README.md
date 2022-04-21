@@ -245,3 +245,5 @@ db.query(`SELECT * FROM user where email= ? and password = ?`,[email, password],
 
 🤷‍ dashboard 게시글은 float을 이용해서 한 번 해보자! 그럼 더 이쁠거같은데? 물론 UI는 난 모르겠다 ㅋㅋ 
 
+## 2022-04-20 mileston Blog CRUD 7일차
+🙎‍ img를 db에 저장해서 client가 불러오는 과정까지는 다 했는데... 왜 안돼지? ㅋㅋㅋㅋ 아 .. ㅋㅋㅋㅋ 내일 다시..해야지..
