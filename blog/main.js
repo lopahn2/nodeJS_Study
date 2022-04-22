@@ -92,6 +92,9 @@ app.get('/home', (req, res) => {
 
 app.get('/dashboard', (req, res) => {
 	if (req.session.isLogin === true){
+		db.query(`SELECT IMGSCR FROM contents where N_NAME = ?`, [req.session.N_NAME], (err, result) => {
+			console.log(result);
+		});
 		let html = template.dashboard(req.session.N_NAME,"");
 		res.send(html);	
 	} else {
@@ -156,20 +159,7 @@ app.post('/user_check', (req, res) => {
 });
 
 app.post('/create_process', (req, res) => {
-	const post = req.body;
-	const image = req.file;
-	const imageUrl = image.path;
-	db.query(`INSERT INTO contents (N_NAME, TITLE, DESCRIPTION, IMGSCR) VALUES(?,?,?,?)`, [req.session.N_NAME, post.title, post.description, imageUrl], (err, result) => {
-		if (err) throw err;
-		
-		if(result.length === 0) {
-			res.write("<script>alert('오류발생')</script>");
-			res.redirect('/home');
-		} else {
-			res.redirect('/home');
-		}
-	});
+	res.send("need to rest until reach the right level. ")
 });
-
 
 app.listen(80);
