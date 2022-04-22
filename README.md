@@ -247,3 +247,6 @@ db.query(`SELECT * FROM user where email= ? and password = ?`,[email, password],
 
 ## 2022-04-20 mileston Blog CRUD 7일차
 🙎‍ img를 db에 저장해서 client가 불러오는 과정까지는 다 했는데... 왜 안돼지? ㅋㅋㅋㅋ 아 .. ㅋㅋㅋㅋ 내일 다시..해야지..
+
+## 2022-04-20 mileston Blog CRUD 8일차
+🙎‍ multer 미들웨어 사용하며 img 파일 업로드 까지는 됐는데.. 이걸 받아오는 create_process 라우터에서 계속 interval server error 가 발생한다.. 비동기 핸들링이 필요한 시점인거 같은데 공부좀 더 하고 와서 다시 시작해야할 것 같다. 여기서 잠시 멈추었다가 다시 시작하는게 더 나은 결과를 위한 길인 것 같다!
