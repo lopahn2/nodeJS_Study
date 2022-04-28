@@ -251,7 +251,7 @@ db.query(`SELECT * FROM user where email= ? and password = ?`,[email, password],
 ## 2022-04-20 mileston Blog CRUD 8일차
 🙎‍ multer 미들웨어 사용하며 img 파일 업로드 까지는 됐는데.. 이걸 받아오는 create_process 라우터에서 계속 interval server error 가 발생한다.. 비동기 핸들링이 필요한 시점인거 같은데 공부좀 더 하고 와서 다시 시작해야할 것 같다. 여기서 잠시 멈추었다가 다시 시작하는게 더 나은 결과를 위한 길인 것 같다!
 
-## 2022-04-27 길벗 1일차 (마크업 문서 수정필요 / npm 다시 )
+## 2022-04-27 길벗 1일차 
 
 ## 프로젝트 구조 갖추기
 
@@ -339,3 +339,47 @@ Error: Cannot find module 'Sequelize'
 
 node_modules 와 sequelize 관련 폴더들을 모두 삭제한 뒤 재설치하니까 됐다. 세상 참 서럽다
 
+## 2022-04-28 길벗 2차 (마크업 문서 수정필요 )
+1. Passport 모듈로 로그인 구현
+필요 패키지
+npm i passport passport-local passport-kakao bcrypt
+
+passport 패키지를 app.js에 연결
+
+passport 모듈을 만든다
+- serialize, deserialize 
+- 로컬, 카카오 로그인 전략 구현하기
+-- 라우터에 접근 권한을 제어하는 미들웨어가 필요하다.
+req.isAuthenticated 메서드 : passport가 req 객체에 추가해주는 메서드.
+-page 라우터에 연결한다. 각 라우터에 미들웨어로 연결해준다.
+router.get('/profile', userDefinedMiddleWare, (req,res) => {~});
+
+회원가입, 로그인, 로그아웃 라우터를 작성한다.
+
+로그인 전략 js파일을 작성한다.
+
+카카오 로그인 라우터를 auth 라우터에 작성.
+
+오류의 시작과 끝은 오타다 
+
+TypeError: User.fineOne is not a function
+ㅋㅋㅋㅋㅋㅋㅋ
+'fineOne'
+ㅋㅋㅋㅋㅋㅋㅋ 
+내 20분 ㅅㅂ
+
+
+
+관리자 설정 이슈 (KOE006)
+node 두려운 재시작 서비스 관리자의 확인이 필요합니다.
+관리자이신 경우 해결방안을 눌러 확인해보세요.
+
+https://hwany.run.goorm.io/auth/kako/callback
+ㅋㅋㅋㅋ kako ㅋㅋ
+ 카코 ㅋㅋ
++ http 프로토콜로도 등록해주어야 된다. 
+
+http://hwany.run.goorm.io/auth/kakao/callback
+https://hwany.run.goorm.io/auth/kakao/callback
+
+내 10ㅂㅜㄴ ㅅㅂ
