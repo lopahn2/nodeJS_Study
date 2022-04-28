@@ -23,4 +23,7 @@ User.associate(db);
 Post.associate(db);
 Hashtag.associate(db);
 
+
+
+
 module.exports = db;
