@@ -252,56 +252,77 @@ db.query(`SELECT * FROM user where email= ? and password = ?`,[email, password],
 🙎‍ multer 미들웨어 사용하며 img 파일 업로드 까지는 됐는데.. 이걸 받아오는 create_process 라우터에서 계속 interval server error 가 발생한다.. 비동기 핸들링이 필요한 시점인거 같은데 공부좀 더 하고 와서 다시 시작해야할 것 같다. 여기서 잠시 멈추었다가 다시 시작하는게 더 나은 결과를 위한 길인 것 같다!
 
 ## 2022-04-27 길벗 1일차 (마크업 문서 수정필요 / npm 다시 )
-1. 프로젝트 구조 갖추기
- - package.json 작성
- - database package install
- -- npm i sequelize mysql2 sequelize-cli
- -- npx sequelize init
 
- - 폴더 구조 생성
- -- 템플릿 파일 (nunjucks)을 넣을 views 폴더
- -- 라우터를 넣을 routes 폴더
- -- 정적 파일들을 넣을 public 폴더
+## 프로젝트 구조 갖추기
 
- - 서버 파일 생성
- -- app.js 생성
- -- .env 파일 생성
+ **package.json 작성**
 
- - 필요한 package들 설치
- -- npm i express  cookie-parser express-session morgan multer dotenv nunjucks
- -- npm i -D nodemon
+**database package install**
+```
+npm i sequelize mysql2 sequelize-cli
+npx sequelize init
+```
+**폴더 구조 생성**
+  - 템플릿 파일 (nunjucks)을 넣을 **views 폴더**
+  - 라우터를 넣을 **routes 폴더**
+  - 정적 파일들을 넣을 **public 폴더**
 
-2. app.js 파일 작성
- - 필요한 모듈들 선언하기
- - 미들웨어 express 객체에 붙이기
- - 라우팅 처리하고 에러 처리 라우팅 붙이기
- - .env 파일 작성하기
+**서버 파일 생성**
+  - app.js 생성
+  - .env 파일 생성
 
-3. page.js 라우터 파일 작성
- - 필요한 기능들을 express.Router() 에 붙이기. 이때 템플릿 엔진에서 공통으로 사용할 변수를 
+**필요한 package들 설치**
+```
+npm i express  cookie-parser express-session morgan multer dotenv nunjucks
+npm i -D nodemon
+
+```
+  
+## app.js 파일 작성
+1. 필요한 모듈들 선언하기
+2. 미들웨어 express 객체에 붙이기
+3. 라우팅 처리하고 에러 처리 라우팅 붙이기
+4. .env 파일 작성하기
+
+## page.js 라우터 파일 작성
+1. 필요한 기능들을 express.Router() 에 붙이기. 이때 템플릿 엔진에서 공통으로 사용할 변수를 
   res.locals 객체에 넣어두었음.
- - 템플릿 엔진 파일 작성
+2. 템플릿 엔진 파일 작성
 
-4. 데이터 베이스 세팅하기
- - Sequelize 미들웨어를 이용해서 모델들 정의하기
- - models 폴더 내부에 있는 index.js를 내가 쓰는 모델들에 대해서 맞춰주기
- - 각 모델들 간의 관계 형성하기. static associate(db) { /* 여기에다가 */ }
- -- 같은 테이블 간 N:M 관계는 모델 이름과 컬럼 이름을 따로 정해주어야 한다. (through 프로퍼티 사용)
- -- 같은 테이블 간 N:M 관계에서 foreignKey와 as 프로퍼티는 서로 반대되는 모델을 포인팅함.
- -- belongsTo의 경우 (정보가 기입되는 테이블).belongsTo(정보를 주는 테이블) 임을 유의한다.
+## 데이터 베이스 세팅하기
+1. Sequelize 미들웨어를 이용해서 모델들 정의하기
+2. models 폴더 내부에 있는 index.js를 내가 쓰는 모델들에 대해서 맞춰주기
+3. 각 모델들 간의 관계 형성하기. 
+```js
+static associate(db) { 
+	/* 여기에다가 */ 
+}
+```
 
-
+> 유의사항
+> 1. 같은 테이블 간 N:M 관계는 모델 이름과 컬럼 이름을 따로 정해주어야 한다. (through 프로퍼티 사용)
+>  2. 같은 테이블 간 N:M 관계에서 foreignKey와 as 프로퍼티는 서로 반대되는 모델을 포인팅함.
+>  3. belongsTo의 경우 (정보가 기입되는 테이블).belongsTo(정보를 주는 테이블) 임을 유의한다.
+  
+ 
+## 에러
+  
+### mysql access denied error  
+```
 Sequelize CLI [Node: 10.16.3, CLI: 6.4.1, ORM: 6.19.0]
 
 Loaded configuration file "config/config.json".
 Using environment "development".
 
 ERROR: Access denied for user 'root'@'localhost'
+```
 
 해결 : https://stackoverflow.com/questions/16003338/mysql2error-access-denied-for-user-testlocalhost-to-database-depot-test
 
 
+### module path twisted??
 여기서 부터 막힘 왤까 ... 뭐가 문제일까
+```
 Error: Cannot find module 'Sequelize'
     at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
     at Function.Module._load (internal/modules/cjs/loader.js:562:25)
@@ -314,4 +335,7 @@ Error: Cannot find module 'Sequelize'
     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
 [nodemon] app crashed - waiting for file changes before starting...
+```
+
+node_modules 와 sequelize 관련 폴더들을 모두 삭제한 뒤 재설치하니까 됐다. 세상 참 서럽다
 
