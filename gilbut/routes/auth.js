@@ -48,6 +48,19 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
 	})(req, res, next);
 });
 
+router.post('/update/:updateId', isLoggedIn, async (req, res) => {
+	await User.update(
+      {
+		nick : req.params.updateId
+	  },
+	  {
+		  where : {nick : req.user.nick}
+	  }	
+	);
+	res.redirect('/');
+	
+});
+
 router.get('/logout', isLoggedIn, (req, res) => {
 	req.logout();
 	req.session.destroy();

@@ -15,7 +15,7 @@ router.use((req, res, next) => {
 
 router.get('/profile', isLoggedIn ,(req, res) => {
 	res.render('profile', {title: '내 정보 - HwanyBird'});
-});
+});	
 
 router.get('/join', isNotLoggedIn ,(req, res) => {
 	res.render('join', {title : '회원가입 - HwanyBird'});
@@ -62,5 +62,7 @@ router.get('/hashtag', async(req, res, next) => {
 		next(err);
 	}
 });
+
+
 
 module.exports = router;

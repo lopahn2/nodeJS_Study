@@ -24,6 +24,7 @@
           <input id="my-id" type="hidden" value="{{user.id}}">
           <a id="my-profile" href="/profile" class="btn">내 프로필</a>
           <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+	      <a id="update" class="btn">프로필 수정하기</a>
         {% else %}
           <form id="login-form" action="/auth/login" method="post">
             <div class="input-group">
@@ -55,6 +56,17 @@
           alert(new URL(location.href).searchParams.get('loginError'));
         }
       };
+	  document.querySelector('#update').addEventListener('click', () => {
+		  const updateId = prompt("닉네임을 뭐로 바꾸실려고?");
+		  axios.post(`/auth/update/${updateId}`)
+				.then(() => {
+				  location.reload();
+				})
+				.catch((err) => {
+				  console.error(err);
+				});
+	  });	
+		
     </script>
     {% block script %}
     {% endblock %}
