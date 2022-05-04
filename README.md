@@ -427,3 +427,98 @@ multer 패키지로 이미지 업로드 구현
 
 ## 2022-05-02 길벗 4일차
 공부한 내용들 포스팅 스터디에 업로드.
+## 2022-05-03 길벗 5일차
+nunjucks 템플릿 엔진 기본 사용법 인지. 혼자 공부할 때 컴포넌트 관리하듯 html 쓸 수 있어서 좋을 듯
+
+## 2022-05-04 길벗 6일차
+
+### 팔로잉 끊기 구현
+**1. 먼저 조건에 따라 팔로우끊기 버튼이 나오도록 조정했다.**
+```html
+{% elif followerIdList.includes(twit.User.id) and twit.User.id !== user.id %}
+<button class="twit-unfollow">팔로우끊기</button>  
+```
+
+**2. 이벤트를 달아주고 axios 요청을 팔로우 제거 라우터로 보내도록 만들었다.**
+```js
+document.querySelectorAll('.twit-unfollow').forEach(function(tag) {
+	tag.addEventListener('click', function() {
+	const myId = document.querySelector('#my-id');
+	if (myId) {
+	  const userId = tag.parentNode.querySelector('.twit-user-id').value;
+	  if (userId !== myId.value) {
+		if (confirm('언팔로우 하시겠습니까?')) {
+		  axios.post(`/user/${userId}/unfollow`)
+			.then(() => {
+			  location.reload();
+			})
+			.catch((err) => {
+			  console.error(err);
+			});
+		}
+	  }
+	}
+	});
+});
+```
+
+**3. 서버 라우터쪽에서 시퀄라이즈 모델의 팔로잉을 remove 해주었다.** <br>
+[참고한 문서](https://sequelize.org/docs/v6/core-concepts/assocs/#note--method-names)
+
+```js
+router.post('/:id/unfollow', isLoggedIn, async (req, res, next) => {
+	try {
+		const user = await User.findOne({ where : { id : req.user.id } });
+		if(user) {
+			await user.removeFollower(parseInt(req.params.id));
+			await user.removeFollowing(parseInt(req.params.id));
+			res.send('success');
+		} else {
+			res.status(404).send('no user');
+		}
+	} catch(err) {
+		console.error(err);
+		next(err);
+	}
+});
+```
+
+### 프로필 수정하기 구현
+**1. 프로필 정보라 해봤자 닉네임 하나뿐이므로 입력창을 따로 안만들고 prompt로 간단히 구현**
+```html
+<a id="update" class="btn">프로필 수정하기</a>
+```
+
+```js
+document.querySelector('#update').addEventListener('click', () => {
+  const updateId = prompt("닉네임을 뭐로 바꾸실려고?");
+  axios.post(`/auth/update/${updateId}`)
+		.then(() => {
+		  location.reload();
+		})
+		.catch((err) => {
+		  console.error(err);
+		});
+ });	
+```
+
+**2. 라우터 구현**
+
+```js
+router.post('/update/:updateId', isLoggedIn, async (req, res) => {
+	await User.update(
+      {
+		nick : req.params.updateId
+	  },
+	  {
+		  where : {nick : req.user.nick}
+	  }	
+	);
+	res.redirect('/');
+	
+});
+```
+
+
+
+
