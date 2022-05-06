@@ -18,6 +18,9 @@ module.exports = () => {
 						  model : User,
 						  attirbutes : ['id', 'nick'],
 						  as: 'Followings'
+					  }, {
+						  model : Post,
+						  as : 'LikedPosts'
 					  }]} )
 			.then(user => done(null, user))
 			.catch(err => done(err));

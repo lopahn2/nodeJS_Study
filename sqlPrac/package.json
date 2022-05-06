@@ -1,0 +1,15 @@
+{
+  "name": "sqlprac",
+  "version": "1.0.0",
+  "description": "practice sequelize",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app"
+  },
+  "author": "hwany",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  }
+}

@@ -108,6 +108,26 @@ input[type='text'], input[type='email'], input[type='password'], textarea {
   font-size: 12px;
   cursor: pointer;
 }
+
+.twit-like {
+	padding : 1px 5px;
+	background : #fff;
+	border : 1px solid silver;
+	border-radius : 5px;
+	color : salmon;
+	font-size : 12px;
+	cursor : pointer;
+}
+.twit-like-yet {
+	padding : 1px 5px;
+	background : #fff;
+	border : 1px solid silver;
+	border-radius : 5px;
+	color : gray;
+	font-size : 12px;
+	cursor : pointer;
+}
+
 .twit-img { text-align: center; }
 .twit-img img { max-width: 75%; }
 .error-message { color: red; font-weight: bold; }
