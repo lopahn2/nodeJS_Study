@@ -533,3 +533,65 @@ MySQL에 대해서 다시금 고민
 ## 2022-05-07 길벗 9일차
 
 Sequelize 사용과 관계에 대해서 다시금 생각
+
+
+## 2022-05-08 길벗 10일차
+### 오늘의 바보짓
+
+**1. 응애**
+
+database config 파일에 development_database 사용한다 했는데 실제 nodejs에서는 nodejs database로 설정해놓고 안된다고 찡찡거리기. <br>
+
+이때 발생한 오류는  <br>
+
+`Unknown column 'name' in 'field list` <br>
+
+바로 config 파일 수정해서 정상작동함. <br>
+
+**2. 응애응애**
+```
+[ ValidationErrorItem {
+       message: 'User.comment cannot be null',
+       type: 'notNull Violation',
+       path: 'comment',
+       value: null,
+       origin: 'CORE',
+       instance: [User],
+       validatorKey: 'is_null',
+       validatorName: null,
+       validatorArgs: [] } ] }
+```
+
+이런거 떴는데 난 분명 코드 책이랑 똑같이 쳐놨단 말이지..? <br>
+그래서 User의 comment 컬럼 옵션을 어떻게 설정했는지 살펴봤어. <br>
+```js
+comment : {
+
+type : Sequelize.TEXT,
+
+allowNull : false,
+
+},
+```
+아 null을 허용하지 않도록 해놨구나. 그래서 저 에러가 뜨는구나. <br>
+
+했어. 했는데 아니 UI에 댓글다는 곳이 없잖아. <br>
+
+밑에 아이디 입력하고 입력하는 칸은 있는데 아직 사용자 등록 전인데..??? <br>
+
+그래서 comment 란은 allowNull을 true로 주고 defaultValue 를 "" 처리해주었다. <br>
+
+```js
+comment : {
+				type : Sequelize.TEXT,
+				allowNull : true,
+				defaultValue : "",
+			},
+```
+<br>
+진짜 다사다난한다.. 그래도 이제 감잡았어. 어떻게 흘러가는지!  <br>
+세번만 더 해보자. 그러면 진짜 흐름잡고 만들 수 있을거같아. <br>
+<br>
+5월 13일 이내에 프로젝트 시작하는거 목표로 공부한다. <br>
+아무도 날 막을 수 없으샘 ㅋㅋ<br>
+
