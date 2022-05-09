@@ -595,3 +595,26 @@ comment : {
 5월 13일 이내에 프로젝트 시작하는거 목표로 공부한다. <br>
 아무도 날 막을 수 없으샘 ㅋㅋ<br>
 
+## 2022-05-09 길벗 11일차
+### 오늘의 바보짓
+
+```
+TypeError: Router.use() requires a middleware function but got a Object  
+```
+
+router 파일의 맨 아래에... <br>
+```js
+module.exports = router;
+```
+이거 안해줘서..그런거.. ㅋㅋ..<br>
+### 오늘 한 것들
+package.json 파일 설정 <br>
+필요한 패키지들 다운로드 <br>
+폴더구조 생성 <br>
+app.js 작성 <br>
+routes 폴더 내부에 route 설정 <br>
+프론트 레이아웃 설정 <br>
+데이터베이스 세팅 <br>
+ 모델 선언 및 관계 설정 <br>
+Passport 모듈로 로그인 구현하기 <br>
+
