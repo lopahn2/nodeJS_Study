@@ -25,7 +25,13 @@ const upload = multer({
       cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
     },
   }),
-  limits: { fileSize: 5 * 1024 * 1024 },
+  limits: { fileSize: 5 * 1024 * 1024 * 1024 },
+});
+
+router.delete('/delete/:postId', isLoggedIn, async(req, res) => {
+	const postId = req.params.postId;
+	await Post.destroy({where : {id : postId}});
+	res.send('success');
 });
 
 router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
@@ -58,5 +64,7 @@ router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
     next(error);
   }
 });
+
+
 
 module.exports = router;

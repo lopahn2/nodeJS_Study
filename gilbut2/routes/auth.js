@@ -51,5 +51,16 @@ router.get('/logout', isLoggedIn, (req, res) => {
   res.redirect('/');
 });
 
+router.post('/nickUpdate/:newNick', isLoggedIn, async (req, res, next) => {
+   
+  try {
+     const changeNick = req.params.newNick;
+	 await User.update({nick : changeNick}, {where : {id : req.user.id}});
+	 return res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+});
 
 module.exports = router;

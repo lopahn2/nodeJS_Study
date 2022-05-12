@@ -24,6 +24,7 @@
           <input id="my-id" type="hidden" value="{{user.id}}">
           <a id="my-profile" href="/profile" class="btn">내 프로필</a>
           <a id="logout" href="/auth/logout" class="btn">로그아웃</a>
+		  <a id="nick-update" href="" class="btn">닉네임 변경</a>
         {% else %}
           <form id="login-form" action="/auth/login" method="post">
             <div class="input-group">
@@ -42,7 +43,7 @@
         </div>
         <footer>
           Made by&nbsp;
-          <a href="https://www.zerocho.com" target="_blank">Hwany</a>
+          <a target="_blank">Hwany</a>
         </footer>
       </div>
       {% block content %}
@@ -55,6 +56,20 @@
           alert(new URL(location.href).searchParams.get('loginError'));
         }
       };
+	
+	document.querySelector('#nick-update').addEventListener('click', () => {
+		console.log('FUCK');
+		const myId = document.querySelector('#my-id');
+		const changedNick = prompt('변경할 이름을 입력하세요');
+		axios.post(`/auth/nickUpdate/${changedNick}`)
+			.then(() => {
+			location.reload();
+		})
+			.catch((err) => {
+			console.error(err);
+		});
+	});	
+    
     </script>
     {% block script %}
     {% endblock %}
