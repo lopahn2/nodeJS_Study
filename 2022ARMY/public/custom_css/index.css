@@ -1,0 +1,63 @@
+#body-rapper {
+	display: flex;
+	flex-direction : row;
+	
+	width : 1200px;
+	height : 600px;
+	border : 2px solid gray;
+	border-radius : 50px;
+	
+	margin : 100px auto;
+	padding : 20px;
+}
+#left-container {
+	width : 560px;
+	height : 560px;
+	
+	background-image : url('../img/goodgun.JPG');
+	background-repeat : no-repeat;
+	background-size : cover;
+	
+	margin : auto auto;
+	padding : 20px;
+}
+#right-container {
+	width : 560px;
+	height : 560px;
+	
+	margin : auto auto;
+	padding : 20px;
+}
+
+
+#form-rapper{
+	width : 520px;
+	height : 520px;
+	
+	margin : auto auto;
+}
+#login-form{
+	display : flex;
+	flex-direction : column;
+	justify-content: center;
+	
+	width : 100%;
+	height : 100%;
+	
+}
+.input-group{
+	display : block;
+	width : 90%;
+	height: 30px;
+	
+	border-radius : 10px;
+	border : 1px solid gray;
+	
+	margin : 20px auto;
+	padding : 3px 10px;
+}
+.btn{
+	display : block;
+	width : contents-fit;
+	height : 30px;
+}
