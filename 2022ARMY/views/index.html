@@ -9,19 +9,18 @@
 <body>
 	<header>39사단 117여단 3대대 통신소대 전산병 상병 반영환</header>
 	
-	<div id = "body-rapper">
+	<div id = "body-wrapper">
 		<div id = "left-container"></div>
 		<div id = "right-container">
-			<div id = "form-rapper">
+			<div id = "form-wrapper">
 				<form id="login-form" action="/auth/login" method="post">
-					  <input class = "input-group" id="email" type="email" name="email" placeholder="email" required autofocus>
-					  <input class = "input-group" id="password" type="password" name="password" placeholder="password" required>
+					<input class = "input-group" id="email" type="text" name="email" placeholder="email" autofocus>
+					<input class = "input-group" id="password" type="password" name="password" placeholder="password" required>
 
-					<a id="join" href="/" class="btn">회원가입</a>
+					<a id="join" href="/auth/join" class="btn">회원가입</a>
 					<a id="find-id-pw" href="/" class="btn">아이디/비밀번호 찾기</a>
 					<button id="login" type="submit" class="btn">로그인</button>
-			
-				  </form>
+				</form>
 			</div>
 		</div>
 	</div>
