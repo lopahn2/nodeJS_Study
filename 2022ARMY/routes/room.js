@@ -33,23 +33,31 @@ router.post('/room_create', isLoggedIn, (req, res, next) => {
 router.get('/:room_id', isLoggedIn, (req, res, next) => {
 	const roomId = req.params.room_id;
 	const sqlRoomSelect = `select * from room where room_id = "${roomId}"`;
-	
-	con.query(sqlRoomSelect, (err, result, fields) => {
-		const roomInfo = result[0];
-		const sqlAdminSelect = `
-		select * from member as m 
-		join army_unit as au
-		on m.dog_tag_name = au.dog_tag_name
-		where m.dog_tag_name = "${roomInfo.dog_tag_name}"`;
-		
-		con.query(sqlAdminSelect, (err1, result1, fields1) => {
-			const adminInfo = result1[0];
-			res.render('room', {roomInfo, adminInfo});	
+		con.query(sqlRoomSelect, (err, result, fields) => {
+			try {
+				const roomInfo = result[0];
+				const sqlAdminSelect = `
+				select * from member as m 
+				join army_unit as au
+				on m.dog_tag_name = au.dog_tag_name
+				where m.dog_tag_name = "${roomInfo.dog_tag_name}"`;
+				con.query(sqlAdminSelect, (err1, result1, fields1) => {
+					const adminInfo = result1[0];
+					res.render('room', {roomInfo, adminInfo});	
+				});
+			} catch(error) {
+				
+				next(error);
+				
+			}
+			
+
+			
+
+
 		});
-		
-		
-	});
 	
+		
 });
 
 module.exports = router;

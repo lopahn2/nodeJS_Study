@@ -13,13 +13,11 @@ router.get('/join', isNotLoggedIn, (req, res, next) => {
 
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
   
-  const { email, password, rank, className, name } = req.body;
+  const { email, password, rank, className, name, operator, division, brigade, battalion, department } = req.body;
   try {
-	var exUser = null;
 	const sqlSelect = `select * from member where dog_tag_name = ${email}`;
 	con.query(sqlSelect, (err, result, fields) => {
-		exUser = result[0]
-		if (exUser) {
+		if (result[0]) {
 		  return res.redirect('/join?error=exist');
 		}
 		const hash = bcrypt.hash(password, 12);
@@ -27,8 +25,13 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
 		const sqlInsert = `insert into member(dog_tag_name, user_pw, rank, class, name, sign_up_date)
 		values("${email}", "${password}", "${rank}", "${className}", "${name}", default)
 		`;
-
+		const sqlSubInfoInsert = `insert into army_unit(dog_tag_name, operator, division, brigade, battalion, department)
+		values("${email}", "${operator}", "${division}", "${brigade}", "${battalion}", "${department}")
+		`;
 		con.query(sqlInsert, (err, result, fileds) => {
+			if(err) throw err;
+		});
+		con.query(sqlSubInfoInsert, (err, result, fields) => {
 			if(err) throw err;
 		});
 		return res.redirect('/');
@@ -67,5 +70,32 @@ router.get('/logout', isLoggedIn, (req, res) => {
 	  res.redirect('/');
   });
 });
+
+router.get('/update_room_option/:roomId', isLoggedIn, (req, res, next) => {
+	const roomId = req.params.roomId;
+	console.log(roomId);
+	const sqlRoomSelect = `select * from room where room_id = "${roomId}"`;
+		con.query(sqlRoomSelect, (err, result, fields) => {
+			try {
+				const roomInfo = result[0];
+				const sqlAdminSelect = `
+				select * from member as m 
+				join army_unit as au
+				on m.dog_tag_name = au.dog_tag_name
+				where m.dog_tag_name = "${roomInfo.dog_tag_name}"`;
+				con.query(sqlAdminSelect, (err1, result1, fields1) => {
+					const adminInfo = result1[0];
+					res.render('updating_room_option',{roomInfo, adminInfo})	
+				});
+			} catch(error) {
+				
+				next(error);
+				
+			}
+		});
+	
+	
+});
+
 
 module.exports = router;
