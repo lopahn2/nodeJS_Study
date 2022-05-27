@@ -97,5 +97,41 @@ router.get('/update_room_option/:roomId', isLoggedIn, (req, res, next) => {
 	
 });
 
+router.post('/update_room_option/:roomId', isLoggedIn, (req, res, next) => {
+	const roomId = parseInt(req.params.roomId);
+
+	const {allowing_department, delete_department} = req.body;
+	console.log(roomId, allowing_department, delete_department);
+	const sqlInsert = `insert into access_department(allow_department, room_id)
+		values("${allowing_department}", ${roomId})
+		`;
+	const sqlDelete = `delete from access_department where room_id = ${roomId} and allow_department ="${delete_department}"`;
+	if(allowing_department && delete_department){
+		console.log(1);
+		con.query(sqlInsert, (err, result, fields) => {
+			con.query(sqlDelete, (err1, result1, fields2) => {
+				console.log(err, err1);
+				console.log(result, " | ", result1);
+				res.redirect('/dashboard');
+			});
+		});
+	}else if(allowing_department) {
+		console.log(2);
+		con.query(sqlInsert, (err, result, fields) =>{
+			console.log(err);
+			res.redirect('/dashboard')
+		}) 
+	}else if(delete_department) {
+		console.log(3);
+		con.query(sqlDelete, (err, result, fields) =>{
+			console.log(err);
+			console.log(result);
+			res.redirect('/dashboard')
+		}) 
+	}
+	
+	
+});
+
 
 module.exports = router;

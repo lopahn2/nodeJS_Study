@@ -114,3 +114,8 @@ INSERT INTO access_department VALUES(NULL, '통신소대', 1);
 INSERT INTO file VALUES(NULL, '20-11111', 'hwp','/home','12.34.56.78', 1, DEFAULT,NULL, NULL);
 
 SELECT * FROM member INNER JOIN army_unit ON member.dog_tag_name = army_unit.dog_tag_name;
+
+insert into access_department(allow_department, room_id)
+		values("${allowing_department}", 3)
+
+delete from access_department where room_id = 7 and allow_department ="통신소대";

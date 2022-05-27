@@ -9,6 +9,7 @@ const con = require('../mysql/mysql');
 
 router.use((req, res, next) => {
 	res.locals.user = req.user;
+	res.locals.ip = req.ip;
 	next();
 });
 
@@ -18,6 +19,7 @@ router.get('/',(req, res) => {
 
 router.get('/dashboard', isLoggedIn ,(req, res, next) => {
 	try {
+		
 		console.log(req.user.dog_tag_name);
 		const sqlSelectRoom = `select * from room`;
 		con.query(sqlSelectRoom, (err, result, fields) => {

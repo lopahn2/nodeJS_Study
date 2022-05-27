@@ -9,6 +9,7 @@ const con = require('../mysql/mysql');
 
 router.use((req, res, next) => {
 	res.locals.user = req.user;
+	res.locals.ip = req.ip;
 	next();
 });
 

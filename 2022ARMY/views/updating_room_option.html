@@ -4,20 +4,65 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>2022ARMY</title>
-	<link rel="stylesheet" href="/custom_css/room.css">
+	<link rel="stylesheet" href="/custom_css/update_room.css">
 </head>
 <body>
 	<header>39사단 117여단 3대대 통신소대 전산병 상병 반영환</header>
 	
 	<div>
-		{{roomInfo.room_id}}방 옵션 변경 구현
+		{{roomInfo.room_id}}  옵션 변경
 	</div>
+	<form action = "/auth/update_room_option/{{roomInfo.room_id}}" method = "post">
+		<button type="button" id = "append_btn">부서 추가하기</button>
+		<button type="button"  id = "delete_btn">부서 삭제하기</button>
+		<div id = "append">
+			<p>
+				부서 추가
+			</p>
+			<input class = "input-group" id="allowing_department" type="text" name="allowing_department" placeholder="허용 목록에 추가 할 부서 명" autofocus>
+			
+		</div>
+		
+		<div id = "delete">
+			<p>
+				부서 삭제
+			</p>
+			<input class = "input-group" id="delete_department" type="text" name="delete_department" placeholder="삭제할 부서 명" >
+		</div>
+		
+		
+		<button type="submit" class="btn">제출하기</button>
+	</form>
 	
 	<footer>2022년 5월 21일</footer>
 
-
-
-
 	
 </body>
+<script>
+	document.querySelector('#append_btn').addEventListener('click', (e) => {
+		const appendDiv = document.querySelector('#append');
+		if(appendDiv.style.display == 'none'){
+			appendDiv.style.display = 'block';
+			
+			document.querySelector('#append_btn').textContent = '부서 추가창 닫기';
+		}else {
+			appendDiv.style.display = 'none';
+			
+			document.querySelector('#append_btn').textContent = '부서 추가하기'
+		}
+	});
+	document.querySelector('#delete_btn').addEventListener('click', (e) => {
+		const deleteDiv = document.querySelector('#delete');
+		if(deleteDiv.style.display == 'none'){
+			deleteDiv.style.display = 'block';
+			
+			document.querySelector('#delete_btn').textContent = '부서 삭제창 닫기';
+		}else {
+			deleteDiv.style.display = 'none';
+			
+			document.querySelector('#delete_btn').textContent = '부서 삭제하기'
+		}
+	});
+	
+</script>
 </html>
