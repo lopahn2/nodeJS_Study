@@ -7,6 +7,14 @@ const router = express.Router();
 
 const con = require('../mysql/mysql');
 
+
+router.use((req, res, next) => {
+	res.locals.user = req.user;
+	res.locals.ip = req.ip;
+	next();
+});
+
+
 router.get('/join', isNotLoggedIn, (req, res, next) => {
 	res.render('signUp');
 });
@@ -73,7 +81,6 @@ router.get('/logout', isLoggedIn, (req, res) => {
 
 router.get('/update_room_option/:roomId', isLoggedIn, (req, res, next) => {
 	const roomId = req.params.roomId;
-	console.log(roomId);
 	const sqlRoomSelect = `select * from room where room_id = "${roomId}"`;
 		con.query(sqlRoomSelect, (err, result, fields) => {
 			try {
@@ -85,7 +92,7 @@ router.get('/update_room_option/:roomId', isLoggedIn, (req, res, next) => {
 				where m.dog_tag_name = "${roomInfo.dog_tag_name}"`;
 				con.query(sqlAdminSelect, (err1, result1, fields1) => {
 					const adminInfo = result1[0];
-					res.render('updating_room_option',{roomInfo, adminInfo})	
+					res.render('updating_room_option',{roomInfo, adminInfo});
 				});
 			} catch(error) {
 				
@@ -100,38 +107,39 @@ router.get('/update_room_option/:roomId', isLoggedIn, (req, res, next) => {
 router.post('/update_room_option/:roomId', isLoggedIn, (req, res, next) => {
 	const roomId = parseInt(req.params.roomId);
 
-	const {allowing_department, delete_department} = req.body;
-	console.log(roomId, allowing_department, delete_department);
+	const {allowing_department, delete_department, update_password} = req.body;
 	const sqlInsert = `insert into access_department(allow_department, room_id)
 		values("${allowing_department}", ${roomId})
 		`;
 	const sqlDelete = `delete from access_department where room_id = ${roomId} and allow_department ="${delete_department}"`;
-	if(allowing_department && delete_department){
-		console.log(1);
-		con.query(sqlInsert, (err, result, fields) => {
-			con.query(sqlDelete, (err1, result1, fields2) => {
-				console.log(err, err1);
-				console.log(result, " | ", result1);
-				res.redirect('/dashboard');
-			});
-		});
-	}else if(allowing_department) {
-		console.log(2);
-		con.query(sqlInsert, (err, result, fields) =>{
-			console.log(err);
-			res.redirect('/dashboard')
-		}) 
-	}else if(delete_department) {
-		console.log(3);
-		con.query(sqlDelete, (err, result, fields) =>{
-			console.log(err);
-			console.log(result);
-			res.redirect('/dashboard')
-		}) 
-	}
+	const sqlUpdate = `update room set room_pw = "${update_password}" where room_id = ${roomId}`;
 	
+	con.query(sqlInsert, (err, result, fields) => {});
+	con.query(sqlDelete, (err1, result, fields) => {});
+	con.query(sqlUpdate, (err, result, fields) => {});
+
+	setImmediate(() => {
+	  res.redirect('/dashboard');
+	});
 	
 });
 
+router.get('/update_ip', isLoggedIn, (req, res, next) => {
+	res.render('updating_ip');
+});
+
+router.post('/update_ip', isLoggedIn, (req, res, next) => {
+	console.log(req.user, req.ip);
+	const { user_location } = req.body;
+	const sqlSelect = `select * from army_unit where dog_tag_name = "${req.user.dog_tag_name}"`;
+	con.query(sqlSelect, (err, result, fields) => {
+		const sqlInsert = `insert into ip(registed_ip, dog_tag_name, user_location, department)
+		values("${req.ip}", "${req.user.dog_tag_name}", "${user_location}", "${result[0].department}")`;	
+		con.query(sqlInsert, (err1, result1, fields1) => {
+		});
+	});
+	
+	res.redirect('/dashboard');
+});
 
 module.exports = router;

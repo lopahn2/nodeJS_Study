@@ -19,7 +19,12 @@
 
 	{% endif %}
 
-	<p>허가된 그룹 명 - 리스트</p>
+	<p>허가된 그룹 명</p>
+	{% for department in accessInfo %}
+	<ul>
+		<li>{{loop.index}}. {{department.allow_department}} </li>
+	</ul>
+	{% endfor %}
 	
 	<div id="file-wrapper">
 		

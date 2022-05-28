@@ -10,11 +10,12 @@
 	<header>39사단 117여단 3대대 통신소대 전산병 상병 반영환</header>
 	
 	<div>
-		{{roomInfo.room_id}}  옵션 변경
+		{{roomInfo.room_name}} 방의 옵션 변경
 	</div>
 	<form action = "/auth/update_room_option/{{roomInfo.room_id}}" method = "post">
 		<button type="button" id = "append_btn">부서 추가하기</button>
 		<button type="button"  id = "delete_btn">부서 삭제하기</button>
+		<button type="button"  id = "password_btn">비밀번호 변경하기</button>
 		<div id = "append">
 			<p>
 				부서 추가
@@ -28,6 +29,12 @@
 				부서 삭제
 			</p>
 			<input class = "input-group" id="delete_department" type="text" name="delete_department" placeholder="삭제할 부서 명" >
+		</div>
+		<div id = "password">
+			<p>
+				비밀번호 변경
+			</p>
+			<input class = "input-group" id="update_password" type="password" name="update_password" placeholder="변경할 비밀번호" >
 		</div>
 		
 		
@@ -61,6 +68,14 @@
 			deleteDiv.style.display = 'none';
 			
 			document.querySelector('#delete_btn').textContent = '부서 삭제하기'
+		}
+	});
+	document.querySelector('#password_btn').addEventListener('click', (e) => {
+		const passwordDiv = document.querySelector('#password');
+		if(passwordDiv.style.display == 'none'){
+			passwordDiv.style.display = 'block';
+		}else {
+			passwordDiv.style.display = 'none';
 		}
 	});
 	

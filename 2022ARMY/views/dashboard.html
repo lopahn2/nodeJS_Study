@@ -11,6 +11,7 @@
 	<p>{{user.name}} 님 환영합니다!</p>
 	<a href="/auth/logout">로그아웃</a>
 	<a href = "/room/room_create">방 만들기</a>
+	<a href = "/auth/update_ip">IP 관리</a>
 	
 	{% for room in roomList %}
 		<li><a href = "/room/{{room.room_id}}">{{room.room_name}}</a></li>
