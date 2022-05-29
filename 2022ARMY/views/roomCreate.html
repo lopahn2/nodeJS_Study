@@ -11,7 +11,7 @@
 	
 	<form id="sign-up-form" action="/room/room_create" method="post">
 		<input class = "input-group" id="room_name" type="text" name="room_name" placeholder="방 이름" autofocus>
-		<input class = "input-group" id="room_pw" type="text" name="room_pw" placeholder="방 비밀번호">
+		<input class = "input-group" id="room_pw" type="password" name="room_pw" placeholder="방 비밀번호">
 		<input class = "input-group" id="dog_tag_name" type="hidden" name="dog_tag_name" value={{user.dog_tag_name}}>
 		<button id="sign-up" type="submit" class="btn">방만들기</button>
 	</form>

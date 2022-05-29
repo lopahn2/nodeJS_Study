@@ -9,11 +9,16 @@
 <body>
 	<header>39사단 117여단 3대대 통신소대 전산병 상병 반영환</header>
 	<p>{{roomInfo.room_name}} 에 오신걸 환영합니다.</p>
-	<p>{{adminInfo.rank}} {{adminInfo.class}} {{adminInfo.name}}</p>
+	<p>만든이 : {{adminInfo.rank}} {{adminInfo.class}} {{adminInfo.name}}</p>
 	<p>접속자 IP : {{ip}}</p>
 	
 	{% if adminInfo.dog_tag_name === user.dog_tag_name %}
 	<a href = '/auth/update_room_option/{{roomInfo.room_id}}'>방 옵션 변경하기</a>
+	<form action = "/room/room_delete" method= "post" >
+		<input class = "input-group" id="room_name" type="hidden" name="room_name" value="{{roomInfo.room_name}}">
+		<input class = "input-group" id="room_name" type="hidden" name="room_pw" value="{{roomInfo.room_pw}}">
+		<button id="sign-up" type="submit" class="btn">방 삭제하기</button>
+	</form>
 
 	{% else %}
 

@@ -13,7 +13,7 @@ router.use((req, res, next) => {
 	next();
 });
 
-router.get('/',(req, res) => {
+router.get('/', isNotLoggedIn ,(req, res) => {
 	res.render('index');
 });
 
@@ -23,7 +23,13 @@ router.get('/dashboard', isLoggedIn ,(req, res, next) => {
 		console.log(req.user.dog_tag_name);
 		const sqlSelectRoom = `select * from room`;
 		con.query(sqlSelectRoom, (err, result, fields) => {
-			res.render('dashboard', {roomList : result});	
+			const sqlSelectIp = `select * from ip where dog_tag_name = "${req.user.dog_tag_name}"`;
+			con.query(sqlSelectIp, (err1, result1, fields1) => {
+				console.log(err1);
+				console.log(result1);
+				res.render('dashboard', {roomList : result, ipInfo : result1});		
+			});
+			
 		});	
 	}catch(err) {
 		next(err);

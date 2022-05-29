@@ -13,7 +13,19 @@ router.use((req, res, next) => {
 	next();
 });
 
+router.post('/room_delete', isLoggedIn, (req, res, next) => {
+	const {room_name, room_pw} = req.body;
+	const sqlRoomDelete = `delete from room where room_name = "${room_name}" and room_pw = "${room_pw}"`;
+	con.query(sqlRoomDelete, (err, result, fields) => {
+		if(result){
 
+			res.send("<script>alert('success to delete!');location.href='/dashboard';</script>");
+		}else {
+			res.send("<script>alert('fail to delete!');location.href='/dashboard';</script>");
+		}
+		
+	});
+});
 
 router.get('/room_create', isLoggedIn, (req, res, next) => {
 	res.render('roomCreate');
@@ -46,9 +58,20 @@ router.post('/room_create', isLoggedIn, (req, res, next) => {
 	res.redirect('/dashboard');
 });
 
-router.get('/:room_id', isLoggedIn, (req, res, next) => {
+router.get('/:room_id/check_pw', isLoggedIn ,(req, res, next) => {
+	const roomId = parseInt(req.params.room_id);
+	res.render('room_pw_check', {roomId});
+});
+router.post('/:room_id/check_pw', isLoggedIn ,(req, res, next) => {
+	const roomId = parseInt(req.params.room_id);
+	const password = req.body.room_pw;
+	res.redirect(`/room/${roomId}/enter?pw=${password}`);
+});
+
+router.get('/:room_id/enter', isLoggedIn, (req, res, next) => {
 	
 	const roomId = parseInt(req.params.room_id);
+	const password = req.query.pw;
 	
 	const sqlSelect = `
 	select * from member as m 
@@ -69,21 +92,27 @@ router.get('/:room_id', isLoggedIn, (req, res, next) => {
 				con.query(sqlRoomSelect, (err, result, fields) => {
 					try {
 						const roomInfo = result[0];
-						const sqlAdminSelect = `
-						select * from member as m 
-						join army_unit as au
-						on m.dog_tag_name = au.dog_tag_name
-						where m.dog_tag_name = "${roomInfo.dog_tag_name}"`;
-						con.query(sqlAdminSelect, (err1, result1, fields1) => {
-							const adminInfo = result1[0];
-							const sqlAccessSelect = `
-							select * from access_department where room_id = ${roomId}
-							`;
-							con.query(sqlAccessSelect, (err2, result2, fields2) => {
-								const accessInfo = result2;
-								res.render('room', {roomInfo, adminInfo, accessInfo});		
+						if (roomInfo.room_pw !== password){
+							const error = new Error('비밀번호가 틀렸습니다.')
+							next(error);
+						}else {
+							const sqlAdminSelect = `
+							select * from member as m 
+							join army_unit as au
+							on m.dog_tag_name = au.dog_tag_name
+							where m.dog_tag_name = "${roomInfo.dog_tag_name}"`;
+							con.query(sqlAdminSelect, (err1, result1, fields1) => {
+								const adminInfo = result1[0];
+								const sqlAccessSelect = `
+								select * from access_department where room_id = ${roomId}
+								`;
+								con.query(sqlAccessSelect, (err2, result2, fields2) => {
+									const accessInfo = result2;
+									res.render('room', {roomInfo, adminInfo, accessInfo});		
+								});
 							});
-						});
+						}
+						
 					} catch(error) {
 						next(error);
 					}
@@ -96,11 +125,9 @@ router.get('/:room_id', isLoggedIn, (req, res, next) => {
 		});
 		
 	});
-	
-	
-	
-	
-		
+
 });
+
+
 
 module.exports = router;

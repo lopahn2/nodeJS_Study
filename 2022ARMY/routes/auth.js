@@ -136,6 +136,7 @@ router.post('/update_ip', isLoggedIn, (req, res, next) => {
 		const sqlInsert = `insert into ip(registed_ip, dog_tag_name, user_location, department)
 		values("${req.ip}", "${req.user.dog_tag_name}", "${user_location}", "${result[0].department}")`;	
 		con.query(sqlInsert, (err1, result1, fields1) => {
+			
 		});
 	});
 	

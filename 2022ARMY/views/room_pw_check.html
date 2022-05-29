@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>2022ARMY</title>
+	<link rel="stylesheet" href="/custom_css/join.css">
+</head>
+<body>
+	<header>39사단 117여단 3대대 통신소대 전산병 상병 반영환</header>
+	
+	<form action="/room/{{roomId}}/check_pw" method ="post">
+		<p>
+			{{roomId}}방의 비밀번호를 입력하세요 / 비밀번호가 없는 방이면 아무것도 입력하지 마세요
+		</p>
+		<input  class = "input-group" id="room_pw" type = "password" id = "pw" name = "room_pw" placeholder = "방 비밀번호를 입력하세요">
+		<button id="check_pw" type="submit" class="btn">입장하기</button>
+	</form>
+	
+	<footer>2022년 5월 21일</footer>
+
+
+
+
+	
+</body>
+</html>
